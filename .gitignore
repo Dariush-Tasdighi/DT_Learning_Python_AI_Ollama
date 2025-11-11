@@ -6,3 +6,4 @@ data/
 .venv/
 .vscode/
 __pycache__/
+function_calling/

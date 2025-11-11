@@ -5,7 +5,7 @@
     - https://github.com/Textualize/rich
     - https://rich.readthedocs.io/en/latest
 
-- Package: 'ollama-python'
+- Package: 'ollama'
     - https://ollama.com
     - https://pypi.org/project/ollama
     - https://github.com/ollama/ollama-python
@@ -70,6 +70,10 @@ python -m pip install -U deep-translator
 
 ```bash
 python -m pip list
+```
+
+```bash
+pip install -r .\requirements.txt -U
 ```
 
 Now! We Create / Modify / Delete / Run the Source Codes...

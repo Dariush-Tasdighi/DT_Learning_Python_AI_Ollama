@@ -1,0 +1,5 @@
+pip
+rich
+ollama
+python-dotenv
+deep-translator
