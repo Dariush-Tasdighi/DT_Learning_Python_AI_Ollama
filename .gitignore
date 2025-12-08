@@ -1,9 +1,10 @@
 .db
 .env
 
-data/
-
 .venv/
 .vscode/
 __pycache__/
+
+data/
 function_calling/
+structured_output/

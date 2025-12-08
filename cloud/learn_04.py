@@ -11,8 +11,6 @@ from ollama import Client
 from dtx_dotenv import get_key_value
 
 from rich import print
-
-# NEW
 from rich.console import Console
 from rich.markdown import Markdown
 
@@ -127,7 +125,6 @@ def main() -> None:
 
         if assistant_answer:
             print("-" * 50)
-            # print(assistant_answer)
             console = Console()
             markdown = Markdown(markup=assistant_answer)
             console.print(markdown)

@@ -67,6 +67,8 @@ print("=" * 50)
 
 
 # **************************************************
+# **************************************************
+# **************************************************
 # 'response'
 # **************************************************
 # ChatResponse(
@@ -90,36 +92,12 @@ print("=" * 50)
 #     )
 # )
 # **************************************************
-
-
 # **************************************************
-# Step (5) - json / json.dumps
-# **************************************************
-# import json
-# import ollama
-# from rich import print
-
-# response = ollama.chat(
-#     model="gemma3:1b",
-#     messages=[{"role": "user", "content": "Tell me a joke."}],
-# )
-
-# # NEW
-# json_string: str = json.dumps(
-#     response,
-#     indent=4,
-#     # TypeError: Object of type ChatResponse is not JSON serializable
-#     default=lambda o: o.__dict__,
-# )
-
-# print("=" * 50)
-# print(json_string)
-# print("=" * 50)
 # **************************************************
 
 
 # **************************************************
-# Step (6)
+# Step (5)
 # **************************************************
 # # NEW
 # import os
@@ -129,11 +107,10 @@ print("=" * 50)
 # # NEW: لوس‌بازی
 # from ollama import ChatResponse
 
-# # NEW
+# # NEW: Constant
 # MODEL_NAME: str = "gemma3:1b".strip().lower()
 
 # # NEW
-# # os.system(command="cls")
 # os.system(command="cls" if os.name == "nt" else "clear")
 
 # # NEW
@@ -154,14 +131,14 @@ print("=" * 50)
 # # NEW:‌ ‌Best Practice
 # print(response.message.content)
 # print("-" * 50)
-# # NEW
+# # NEW: Bad Practice
 # print(response["message"]["content"])
 # print("=" * 50)
 # **************************************************
 
 
 # **************************************************
-# Step (7) - Client
+# Step (6) - Client
 # **************************************************
 # import os
 # from rich import print
@@ -174,13 +151,13 @@ print("=" * 50)
 
 # # NEW
 # BASE_URL: str = "http://127.0.0.1:11434".strip().lower()
-# # دستور ذیل روی بعضی از سیستم‌ها، کار نمی‌کند
-# # BASE_URL: str = "http://localBASE_URL:11434".strip().lower()
+# # BASE_URL: str = "http://localhost:11434".strip().lower()
 
 # os.system(command="cls" if os.name == "nt" else "clear")
 
 # messages: list[dict] = []
 
+# # NEW
 # user_prompt: str = "Tell me a short science fiction story."
 # user_message: dict = {"role": "user", "content": user_prompt}
 # messages.append(user_message)
@@ -204,12 +181,65 @@ print("=" * 50)
 
 
 # **************************************************
+# Step (7) - 'rich': Markdown
+# **************************************************
+# import os
+# from rich import print
+# from ollama import Client
+# from ollama import ChatResponse
+
+# # NEW
+# from rich.console import Console
+# from rich.markdown import Markdown
+
+# MODEL_NAME: str = "gemma3:1b".strip().lower()
+# BASE_URL: str = "http://127.0.0.1:11434".strip().lower()
+
+# os.system(command="cls" if os.name == "nt" else "clear")
+
+# messages: list[dict] = []
+
+# # NEW
+# # user_prompt: str = "Tell me a short science fiction story."
+# user_prompt: str = "Write a python code to print numbers between one to ten."
+
+# user_message: dict = {"role": "user", "content": user_prompt}
+# messages.append(user_message)
+
+# client = Client(
+#     host=BASE_URL,
+# )
+
+# response: ChatResponse = client.chat(
+#     stream=False,
+#     model=MODEL_NAME,
+#     messages=messages,
+# )
+
+# assistant_answer: str | None = response.message.content
+
+# if not assistant_answer:
+#     assistant_answer = "[-] No content received!"
+
+# print("=" * 50)
+# # print(assistant_answer)
+# # NEW
+# console = Console()
+# markdown = Markdown(markup=assistant_answer)
+# console.print(markdown)
+# print("=" * 50)
+# **************************************************
+
+
+# **************************************************
 # Step (8) - Temperature
 # **************************************************
 # import os
 # from rich import print
 # from ollama import Client
 # from ollama import ChatResponse
+# from rich.console import Console
+# from rich.markdown import Markdown
 
 # # NEW
 # TEMPERATURE: float = 0.7
@@ -237,8 +267,15 @@ print("=" * 50)
 #     options={"temperature": TEMPERATURE},
 # )
 
+# assistant_answer: str | None = response.message.content
+
+# if not assistant_answer:
+#     assistant_answer = "[-] No content received!"
+
 # print("=" * 50)
-# print(response.message.content)
+# console = Console()
+# markdown = Markdown(markup=assistant_answer)
+# console.print(markdown)
 # print("=" * 50)
 # **************************************************
 
@@ -250,6 +287,9 @@ print("=" * 50)
 # from rich import print
 # from ollama import Client
 # from ollama import ChatResponse
+
+# # from rich.console import Console
+# # from rich.markdown import Markdown
 
 # # NEW
 # from typing import Iterator
@@ -296,6 +336,8 @@ print("=" * 50)
 # from rich import print
 # from ollama import Client
 # from ollama import ChatResponse
+# from rich.console import Console
+# from rich.markdown import Markdown
 
 # # NEW
 # import time
@@ -329,8 +371,15 @@ print("=" * 50)
 # # NEW
 # response_time: float = time.time() - start_time
 
+# assistant_answer: str | None = response.message.content
+
+# if not assistant_answer:
+#     assistant_answer = "[-] No content received!"
+
 # print("=" * 50)
-# print(response.message.content)
+# console = Console()
+# markdown = Markdown(markup=assistant_answer)
+# console.print(markdown)
 # print("-" * 50)
 # # NEW
 # print(f"Full response received {response_time:.2f} seconds after request.")
@@ -346,6 +395,8 @@ print("=" * 50)
 # from rich import print
 # from ollama import Client
 # from ollama import ChatResponse
+# from rich.console import Console
+# from rich.markdown import Markdown
 
 # TEMPERATURE: float = 0.7
 # # NEW
@@ -373,20 +424,34 @@ print("=" * 50)
 #     think=True,
 #     # think=False,  # Default: False
 #     stream=False,
-#     messages=messages,
 #     model=MODEL_NAME,
+#     messages=messages,
 #     options={"temperature": TEMPERATURE},
 # )
 
 # response_time: float = time.time() - start_time
 
+# assistant_answer: str | None = response.message.content
+
+# if not assistant_answer:
+#     assistant_answer = "[-] No content received!"
+
+# assistant_thinking: str | None = response.message.thinking
+
+# if not assistant_thinking:
+#     assistant_thinking = "[-] No thinking received!"
+
 # print("=" * 50)
 # print(response)
 # print("-" * 50)
 # # NEW
-# print(response.message.thinking)
+# console = Console()
+# markdown = Markdown(markup=assistant_thinking)
+# console.print(markdown)
 # print("-" * 50)
-# print(response.message.content)
+# console = Console()
+# markdown = Markdown(markup=assistant_answer)
+# console.print(markdown)
 # print("-" * 50)
 # print(f"Full response received {response_time:.2f} seconds after request.")
 # print("=" * 50)
@@ -418,7 +483,7 @@ print("=" * 50)
 
 # **************************************************
 # Step (12)
-#
+# **************************************************
 # - Without History
 # - Simple Text Chat Bot
 # - System Prompt -> System Message
@@ -428,6 +493,8 @@ print("=" * 50)
 # from rich import print
 # from ollama import Client
 # from ollama import ChatResponse
+# from rich.console import Console
+# from rich.markdown import Markdown
 
 # TEMPERATURE: float = 0.7
 # # NEW
@@ -471,8 +538,15 @@ print("=" * 50)
 
 #     response_time: float = time.time() - start_time
 
+#     assistant_answer: str | None = response.message.content
+
+#     if not assistant_answer:
+#         assistant_answer = "[-] No content received!"
+
 #     print("-" * 50)
-#     print(response.message.content)
+#     console = Console()
+#     markdown = Markdown(markup=assistant_answer)
+#     console.print(markdown)
 #     print("-" * 50)
 #     print(f"Full response received {response_time:.2f} seconds after request.")
 #     print("=" * 50)
@@ -482,7 +556,7 @@ print("=" * 50)
 
 # **************************************************
 # Step (13)
-#
+# **************************************************
 # - With History
 # - Simple Text Chat Bot
 # - System Prompt -> System Message
@@ -492,6 +566,8 @@ print("=" * 50)
 # from rich import print
 # from ollama import Client
 # from ollama import ChatResponse
+# from rich.console import Console
+# from rich.markdown import Markdown
 
 # TEMPERATURE: float = 0.7
 # # MODEL_NAME: str = "gemma3:1b".strip().lower()
@@ -533,13 +609,20 @@ print("=" * 50)
 
 #     response_time: float = time.time() - start_time
 
-#     # NEW - در این مثال، فرض بر این است که حتما جواب داریم
+#     #در این مثال، فرض بر این است که حتما جواب داریم
 #     assistant_answer: str | None = response.message.content
+
+#     if not assistant_answer:
+#         assistant_answer = "[-] No content received!"
+
+#     # NEW
 #     assistant_message: dict = {"role": "assistant", "content": assistant_answer}
 #     messages.append(assistant_message)
 
 #     print("-" * 50)
-#     print(assistant_answer)
+#     console = Console()
+#     markdown = Markdown(markup=assistant_answer)
+#     console.print(markdown)
 #     print("-" * 50)
 #     print(f"Full response received {response_time:.2f} seconds after request.")
 #     print("=" * 50)
@@ -555,6 +638,8 @@ print("=" * 50)
 # from rich import print
 # from ollama import Client
 # from ollama import ChatResponse
+# from rich.console import Console
+# from rich.markdown import Markdown
 
 # # NEW
 # USER_QUESTION: str = "User: "
@@ -625,6 +710,10 @@ print("=" * 50)
 #     response_time: float = time.time() - start_time
 
 #     assistant_answer: str | None = response.message.content
+
+#     if not assistant_answer:
+#         assistant_answer = "[-] No content received!"
+
 #     # NEW
 #     assistant_message: dict = {
 #         KEY_NAME_ROLE: ROLE_ASSISTANT,
@@ -633,7 +722,9 @@ print("=" * 50)
 #     messages.append(assistant_message)
 
 #     print("-" * 50)
-#     print(assistant_answer)
+#     console = Console()
+#     markdown = Markdown(markup=assistant_answer)
+#     console.print(markdown)
 #     print("-" * 50)
 #     print(f"Full response received {response_time:.2f} seconds after request.")
 #     print("=" * 50)
@@ -649,6 +740,8 @@ print("=" * 50)
 # from rich import print
 # from ollama import Client
 # from ollama import ChatResponse
+# from rich.console import Console
+# from rich.markdown import Markdown
 
 # EXIT_COMMANDS: list[str] = [
 #     "bye".strip().lower(),
@@ -684,14 +777,12 @@ print("=" * 50)
 # # NEW
 # def chat(
 #     messages: list[dict],
-#     base_url: str = BASE_URL,
 #     think: bool = False,
+#     base_url: str = BASE_URL,
 #     model_name: str = MODEL_NAME,
 #     temperature: float = TEMPERATURE,
 # ) -> str | None:
-#     """
-#     Chat complete with Ollama service function.
-#     """
+#     """Chat with Ollama service."""
 
 #     client = Client(
 #         host=base_url,
@@ -712,9 +803,7 @@ print("=" * 50)
 
 # # NEW
 # def main() -> None:
-#     """
-#     Main function.
-#     """
+#     """The main of program"""
 
 #     os.system(command="cls" if os.name == "nt" else "clear")
 
@@ -754,7 +843,9 @@ print("=" * 50)
 #             messages.append(assistant_message)
 
 #         print("-" * 50)
-#         print(assistant_answer)
+#         console = Console()
+#         markdown = Markdown(markup=assistant_answer)
+#         console.print(markdown)
 #         print("-" * 50)
 #         print(f"Full response received {response_time:.2f} seconds after request.")
 #         print("=" * 50)
@@ -773,7 +864,7 @@ print("=" * 50)
 # User Message 2
 # Assistant Message 2
 # User Message 3
-#   Assistant Answer: None!!! OR "" -> messages.pop()
+#   Assistant Answer: None OR "" -> messages.pop()
 
 # =>
 
@@ -795,6 +886,8 @@ print("=" * 50)
 # from rich import print
 # from ollama import Client
 # from ollama import ChatResponse
+# from rich.console import Console
+# from rich.markdown import Markdown
 
 # EXIT_COMMANDS: list[str] = [
 #     "bye".strip().lower(),
@@ -833,9 +926,7 @@ print("=" * 50)
 #     model_name: str = MODEL_NAME,
 #     temperature: float = TEMPERATURE,
 # ) -> str | None:
-#     """
-#     Chat function.
-#     """
+#     """Chat with Ollama service."""
 
 #     client = Client(
 #         host=base_url,
@@ -855,9 +946,7 @@ print("=" * 50)
 
 
 # def main() -> None:
-#     """
-#     Main function.
-#     """
+#     """The main of program"""
 
 #     os.system(command="cls" if os.name == "nt" else "clear")
 
@@ -896,7 +985,9 @@ print("=" * 50)
 #             messages.append(assistant_message)
 
 #         print("-" * 50)
-#         print(assistant_answer)
+#         console = Console()
+#         markdown = Markdown(markup=assistant_answer)
+#         console.print(markdown)
 #         print("-" * 50)
 #         print(f"Full response received {response_time:.2f} seconds after request.")
 #         print("=" * 50)
@@ -909,11 +1000,13 @@ print("=" * 50)
 #         main()
 
 #     except KeyboardInterrupt:
-#         pass
+#         print()
 
 #     except Exception as error:
 #         # Log 'error'
-#         print(f"[-] {error}")
+#         print(f"[-] {error}!")
+
+#     print()
 # **************************************************
 
 
@@ -925,6 +1018,8 @@ print("=" * 50)
 # from rich import print
 # from ollama import Client
 # from ollama import ChatResponse
+# from rich.console import Console
+# from rich.markdown import Markdown
 
 # EXIT_COMMANDS: list[str] = [
 #     "bye".strip().lower(),
@@ -965,9 +1060,7 @@ print("=" * 50)
 #     model_name: str = MODEL_NAME,
 #     temperature: float = TEMPERATURE,
 # ) -> tuple[str | None, int, int]:
-#     """
-#     Chat function.
-#     """
+#     """Chat with Ollama service."""
 
 #     client = Client(
 #         host=base_url,
@@ -994,7 +1087,7 @@ print("=" * 50)
 #     prompt_tokens: int = 0
 #     completion_tokens: int = 0
 
-#     if response and assistant_answer:
+#     if assistant_answer:
 #         if response.eval_count:
 #             completion_tokens = response.eval_count
 #         if response.prompt_eval_count:
@@ -1004,9 +1097,7 @@ print("=" * 50)
 
 
 # def main() -> None:
-#     """
-#     Main function.
-#     """
+#     """The main of program"""
 
 #     os.system(command="cls" if os.name == "nt" else "clear")
 
@@ -1029,6 +1120,11 @@ print("=" * 50)
 #         start_time: float = time.time()
 
 #         # NEW
+#         # assistant_answer, _, _ = chat(
+#         #     messages=messages,
+#         # )
+
+#         # NEW
 #         assistant_answer, prompt_tokens, completion_tokens = chat(
 #             messages=messages,
 #         )
@@ -1046,7 +1142,9 @@ print("=" * 50)
 #             messages.append(assistant_message)
 
 #         print("-" * 50)
-#         print(assistant_answer)
+#         console = Console()
+#         markdown = Markdown(markup=assistant_answer)
+#         console.print(markdown)
 #         print("-" * 50)
 #         # NEW
 #         print("Prompt Tokens (Input):", prompt_tokens)
@@ -1064,9 +1162,11 @@ print("=" * 50)
 #         main()
 
 #     except KeyboardInterrupt:
-#         pass
+#         print()
 
 #     except Exception as error:
 #         # Log 'error'
-#         print(f"[-] {error}")
+#         print(f"[-] {error}!")
+
+#     print()
 # **************************************************

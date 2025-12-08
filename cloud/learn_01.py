@@ -19,35 +19,35 @@
 
 
 # **************************************************
-# import os
-# from ollama import Client
-# from dotenv import load_dotenv
+import os
+from ollama import Client
+from dotenv import load_dotenv
 
-# load_dotenv()
+load_dotenv()
 
-# api_key = os.getenv(key="OLLAMA_API_KEY")
+api_key = os.getenv(key="OLLAMA_API_KEY")
 
-# if not api_key:
-#     print(f"[-] Key not found or is empty!")
-#     exit()
+if not api_key:
+    print(f"[-] Key not found or is empty!")
+    exit()
 
-# client = Client(
-#     host="https://ollama.com",
-#     headers={"Authorization": f"Bearer {api_key}"},
-# )
+client = Client(
+    host="https://ollama.com",
+    headers={"Authorization": f"Bearer {api_key}"},
+)
 
-# response = client.chat(
-#     model="gpt-oss:20b-cloud",
-#     messages=[{"role": "user", "content": "Tell me a joke."}],
-# )
+response = client.chat(
+    model="gpt-oss:20b-cloud",
+    messages=[{"role": "user", "content": "Tell me a joke."}],
+)
 
-# print(response.message.content)
+print(response.message.content)
 # **************************************************
 
 
 # **************************************************
-# googooli> my_module.py
 # googooli> app.py
+# googooli> my_module.py
 #
 # app.py:
 # import my_module
@@ -79,56 +79,56 @@
 # - temperature
 # - How to import your module from parent directory!
 # **************************************************
-import sys
+# import sys
 
-sys.path.append("..")
+# sys.path.append("..")
 
-import os
-from rich import print
-from ollama import Client
-from dtx_dotenv import get_key_value
+# import os
+# from rich import print
+# from ollama import Client
+# from dtx_dotenv import get_key_value
 
-TEMPERATURE: float = 0.7
-BASE_URL: str = "https://ollama.com".strip().lower()
-MODEL_NAME: str = "gpt-oss:20b-cloud".strip().lower()
-KEY_NAME_OLLAMA_API_KEY: str = "OLLAMA_API_KEY".strip().upper()
+# TEMPERATURE: float = 0.7
+# BASE_URL: str = "https://ollama.com".strip().lower()
+# MODEL_NAME: str = "gpt-oss:20b-cloud".strip().lower()
+# KEY_NAME_OLLAMA_API_KEY: str = "OLLAMA_API_KEY".strip().upper()
 
-os.system(command="cls" if os.name == "nt" else "clear")
+# os.system(command="cls" if os.name == "nt" else "clear")
 
-api_key: str = get_key_value(
-    key=KEY_NAME_OLLAMA_API_KEY,
-)
+# api_key: str = get_key_value(
+#     key=KEY_NAME_OLLAMA_API_KEY,
+# )
 
-headers: dict = {"Authorization": f"Bearer {api_key}"}
+# headers: dict = {"Authorization": f"Bearer {api_key}"}
 
-client = Client(
-    host=BASE_URL,
-    headers=headers,
-)
+# client = Client(
+#     host=BASE_URL,
+#     headers=headers,
+# )
 
-messages: list[dict] = []
+# messages: list[dict] = []
 
-user_prompt: str = "Tell me a joke."
-user_message: dict = {"role": "user", "content": user_prompt}
-messages.append(user_message)
+# user_prompt: str = "Tell me a joke."
+# user_message: dict = {"role": "user", "content": user_prompt}
+# messages.append(user_message)
 
-response = client.chat(
-    model=MODEL_NAME,
-    messages=messages,
-    options={"temperature": TEMPERATURE},
-)
+# response = client.chat(
+#     model=MODEL_NAME,
+#     messages=messages,
+#     options={"temperature": TEMPERATURE},
+# )
 
-assistant_answer: str | None = response.message.content
+# assistant_answer: str | None = response.message.content
 
-print("=" * 50)
-print(assistant_answer)
-print("=" * 50)
+# print("=" * 50)
+# print(assistant_answer)
+# print("=" * 50)
 # **************************************************
 
 
 # **************************************************
 # - System Prompt
-# - Simpole Chatbot
+# - Simple Chatbot
 # - Without History
 # **************************************************
 # import sys

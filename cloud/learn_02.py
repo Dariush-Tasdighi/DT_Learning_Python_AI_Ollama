@@ -13,6 +13,10 @@ from rich import print
 from ollama import Client
 from dtx_dotenv import get_key_value
 
+# NEW
+from rich.console import Console
+from rich.markdown import Markdown
+
 # فعلا به دستور ذیل احتیاج ندارد
 # BASE_URL: str = "https://ollama.com".strip().lower()
 KEY_NAME_OLLAMA_API_KEY: str = "OLLAMA_API_KEY".strip().upper()
@@ -57,9 +61,9 @@ def main() -> None:
     # print(f"Result Count: {len(response.results)}")
     # print("=" * 50)
     # print()
-    # for index, result in enumerate(response.results):
+    # for index, result in enumerate(response.results, start=1):
     #     print("-" * 50)
-    #     print(f"Result: [{index + 1}]")
+    #     print(f"Result: [{index}]")
     #     print()
     #     print("Title:")
     #     print(result.title)
@@ -92,9 +96,9 @@ def main() -> None:
     # print(f"Response Time: {response_time:.2f} seconds.")
     # print("=" * 50)
     # print()
-    # for index, result in enumerate(response.results):
+    # for index, result in enumerate(response.results, start=1):
     #     print("-" * 50)
-    #     print(f"Result: [{index + 1}]")
+    #     print(f"Result: [{index}]")
     #     print()
     #     print("Title:")
     #     print(result.title)
@@ -103,8 +107,13 @@ def main() -> None:
     #     print(result.url)
     #     print()
     #     print("Content:")
-    #     if result.content:
-    #         print(result.content[:50])
+    #     content: str | None = result.content
+    #     if content:
+    #         content = content.strip()[:200]
+    #         # print(content)
+    #         console = Console()
+    #         markdown = Markdown(content)
+    #         console.print(markdown)
     #     print("-" * 50)
     #     print()
     # /Step (3)

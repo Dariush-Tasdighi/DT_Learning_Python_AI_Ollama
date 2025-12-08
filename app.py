@@ -1,18 +1,18 @@
 """
-Simple Chatbot using Ollama
+Simple Chatbot using Ollama service
 """
 
 import os
 import time
 from rich import print
 import dt_ollama as ollama
+
+# from dt_ollama import chat
 import dt_llm_utility as utility
 
 
 def main() -> None:
-    """
-    Main function.
-    """
+    """The main of program"""
 
     os.system(command="cls" if os.name == "nt" else "clear")
 
@@ -35,7 +35,7 @@ def main() -> None:
         start_time: float = time.time()
 
         assistant_answer, prompt_tokens, completion_tokens = ollama.chat(
-            notify=True,
+            # notify=True,
             messages=messages,
         )
 
@@ -68,7 +68,9 @@ if __name__ == "__main__":
         main()
 
     except KeyboardInterrupt:
-        pass
+        print()
 
     except Exception as error:
-        print(f"[-] {error}")
+        print(f"[-] {error}!")
+
+    print()

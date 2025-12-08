@@ -1,11 +1,13 @@
 """
-Dariush Tasdighi Ollama module. Version: 2.1
+Dariush Tasdighi Ollama module.
 """
 
+from rich import print
 from ollama import Client
 from ollama import ChatResponse
 import dt_llm_utility as utility
 
+VERSION: str = "2.2"
 TEMPERATURE: float = 0.7
 MODEL_NAME: str = "gemma3:1b".strip().lower()
 BASE_URL: str = "http://127.0.0.1:11434".strip().lower()
@@ -26,16 +28,14 @@ def chat(
     model_name: str = MODEL_NAME,
     temperature: float = TEMPERATURE,
 ) -> tuple[str | None, int, int]:
-    """
-    Chat function.
-    """
+    """Chat with Ollama service."""
 
     client = Client(
         host=base_url,
     )
 
     if notify:
-        print(f"Ollama chat started ({model_name})...")
+        print(f"Ollama '{model_name}' chat started...")
 
     response: ChatResponse = client.chat(
         think=think,
@@ -46,14 +46,14 @@ def chat(
     )
 
     if notify:
-        print(f"Ollama chat finished ({model_name}).")
+        print(f"Ollama '{model_name}' chat finished.")
 
     assistant_answer: str | None = response.message.content
 
     prompt_tokens: int = 0
     completion_tokens: int = 0
 
-    if response and assistant_answer:
+    if assistant_answer:
         if response.eval_count:
             completion_tokens = response.eval_count
         if response.prompt_eval_count:

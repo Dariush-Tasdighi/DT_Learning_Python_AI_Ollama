@@ -9,6 +9,8 @@ import time
 from rich import print
 import dt_ollama as ollama
 import dt_llm_utility as utility
+from rich.console import Console
+from rich.markdown import Markdown
 
 TEMPERATURE: float = 0
 
@@ -71,9 +73,7 @@ SYSTEM_MESSAGE: dict = {
 
 
 def main() -> None:
-    """
-    Main function.
-    """
+    """The main of program"""
 
     os.system(command="cls" if os.name == "nt" else "clear")
 
@@ -110,7 +110,9 @@ def main() -> None:
             assistant_answer = utility.MESSAGE_NO_CONTENT_RECEIVED
 
         print("-" * 50)
-        print(assistant_answer)
+        console = Console()
+        markdown = Markdown(markup=assistant_answer)
+        console.print(markdown)
         print("-" * 50)
         print("Prompt Tokens (Input):", prompt_tokens)
         print("-" * 50)
@@ -126,10 +128,12 @@ if __name__ == "__main__":
         main()
 
     except KeyboardInterrupt:
-        pass
+        print()
 
     except Exception as error:
-        print(f"[-] {error}")
+        print(f"[-] {error}!")
+
+    print()
 # **************************************************
 
 

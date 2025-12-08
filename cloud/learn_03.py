@@ -9,9 +9,12 @@ sys.path.append("..")
 
 import os
 import time
-from rich import print
 from ollama import Client
 from dtx_dotenv import get_key_value
+
+from rich import print
+from rich.console import Console
+from rich.markdown import Markdown
 
 # BASE_URL: str = "https://ollama.com".strip().lower()
 KEY_NAME_OLLAMA_API_KEY: str = "OLLAMA_API_KEY".strip().upper()
@@ -56,8 +59,8 @@ def main() -> None:
     # if response.links:
     #     print("-" * 50)
     #     print("Link(s):")
-    #     for index, link in enumerate(response.links):
-    #         print(f"{index + 1}: {link}")
+    #     for index, link in enumerate(response.links, start=1):
+    #         print(f"{index}: {link}")
     # print("=" * 50)
     # /Step (2)
 
@@ -72,13 +75,16 @@ def main() -> None:
     # print("Title:")
     # print(response.title)
     # print("-" * 50)
-    # print("Content:")
-    # print(response.content)
+    # if response.content:
+    #     # print("Content:")
+    #     console = Console()
+    #     markdown = Markdown(response.content)
+    #     console.print(markdown)
     # if response.links:
     #     print("-" * 50)
     #     print("Link(s):")
-    #     for index, link in enumerate(response.links):
-    #         print(f"{index + 1}: {link}")
+    #     for index, link in enumerate(response.links, start=1):
+    #         print(f"{index}: {link}")
     # print("-" * 50)
     # print(f"Response Time: {response_time:.2f} seconds.")
     # print("=" * 50)
