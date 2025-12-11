@@ -8,19 +8,19 @@ import time
 from rich import print
 import dt_ollama as ollama
 import dt_llm_utility as utility
+from rich.console import Console
+from rich.markdown import Markdown
 import translator_constants as constants
 
 
 def main() -> None:
-    """
-    Main function.
-    """
+    """Main of program."""
 
     os.system(command="cls" if os.name == "nt" else "clear")
 
     while True:
         print("=" * 50)
-        user_prompt: str = input(utility.QUESTION_PROMPT)
+        user_prompt: str = input(utility.QUESTION_PROMPT).strip()
 
         if user_prompt.lower() in utility.EXIT_COMMANDS:
             break
@@ -50,7 +50,9 @@ def main() -> None:
             assistant_answer = utility.MESSAGE_NO_CONTENT_RECEIVED
 
         print("-" * 50)
-        print(assistant_answer)
+        console = Console()
+        markdown = Markdown(markup=assistant_answer)
+        console.print(markdown)
         print("-" * 50)
         print("Prompt Tokens (Input):", prompt_tokens)
         print("-" * 50)
@@ -66,7 +68,9 @@ if __name__ == "__main__":
         main()
 
     except KeyboardInterrupt:
-        pass
+        print()
 
     except Exception as error:
-        print(f"[-] {error}")
+        print(f"[-] {error}!")
+
+    print()
