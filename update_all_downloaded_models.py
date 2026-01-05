@@ -20,8 +20,8 @@ for model_item in models:
 
 model_names.sort()
 
-for index, model_name in enumerate(model_names):
-    index_string: str = str(index + 1).rjust(2, " ")
+for index, model_name in enumerate(model_names, start=1):
+    index_string: str = str(index).rjust(2, " ")
     print(index_string, "Updating... ", model_name)
     ollama.pull(model=model_name)
 

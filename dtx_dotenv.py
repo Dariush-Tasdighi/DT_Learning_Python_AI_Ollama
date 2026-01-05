@@ -6,7 +6,7 @@ import os
 import logging
 from dotenv import load_dotenv
 
-VERSION: str = "1.1"
+__version__ = "1.2"
 
 logger = logging.getLogger(name=__name__)
 logger.addHandler(hdlr=logging.NullHandler())

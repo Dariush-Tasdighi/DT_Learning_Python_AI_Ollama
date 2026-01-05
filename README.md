@@ -3,28 +3,28 @@
 ## Packages
 
 - 'rich' package:
-  - [pypi.org](https://pypi.org/project/rich)
-  - [github.com](https://github.com/Textualize/rich)
-  - Extra
-    - [Site](https://rich.readthedocs.io/en/latest)
+  - <https://pypi.org/project/rich>
+  - <https://github.com/Textualize/rich>
+  - **Notes:**
+    - Site: <https://rich.readthedocs.io/en/latest>
 
 - 'ollama' package:
-  - [pypi.org](https://pypi.org/project/ollama)
-  - [github.com](https://github.com/ollama/ollama-python)
-  - Extra
-    - [Site](https://ollama.com)
+  - <https://pypi.org/project/ollama>
+  - <https://github.com/ollama/ollama-python>
+  - **Notes:**
+    - Site: <https://ollama.com>
 
 - 'googletrans' package:
-  - [pypi.org](https://pypi.org/project/googletrans)
-  - [github.com](https://github.com/ssut/py-googletrans)
+  - <https://pypi.org/project/googletrans>
+  - <https://github.com/ssut/py-googletrans>
 
 - 'dotenv-python' package:
-  - [pypi.org](https://pypi.org/project/dotenv-python)
-  - [github.com](https://github.com/TsuiJie/dotenv-python)
+  - <https://pypi.org/project/dotenv-python>
+  - <https://github.com/TsuiJie/dotenv-python>
 
 - 'deep-translator' package:
-  - [pypi.org](https://pypi.org/project/deep-translator)
-  - [github.com](https://github.com/nidhaloff/deep-translator)
+  - <https://pypi.org/project/deep-translator>
+  - <https://github.com/nidhaloff/deep-translator>
 
 ## References
 

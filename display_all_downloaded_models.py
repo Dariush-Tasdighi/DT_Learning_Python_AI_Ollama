@@ -13,6 +13,8 @@ os.system(command="cls" if os.name == "nt" else "clear")
 ollama_list: ListResponse = ollama.list()
 
 print(ollama_list)
+
+# Bad Practice
 # print(ollama_list["models"])
 
 # Best Practice
@@ -68,8 +70,11 @@ print(ollama_list)
 # # for index, model_name in enumerate(model_names):
 # #     print(index + 1, model_name)
 
-# # for index, model_name in enumerate(model_names):
-# #     index_string: str = str(index + 1).rjust(2, " ")
+# # for index, model_name in enumerate(model_names, start=1):
+# #     print(index, model_name)
+
+# # for index, model_name in enumerate(model_names, start=1):
+# #     index_string: str = str(index).rjust(2, " ")
 # #     print(index_string, model_name)
 
 # print()
