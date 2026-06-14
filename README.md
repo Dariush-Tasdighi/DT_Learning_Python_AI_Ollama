@@ -1,30 +1,46 @@
-# Working with Ollama
+# Learning 'ollama' Package
 
-## Packages
+## This program was developed by
 
-- 'rich' package:
-  - <https://pypi.org/project/rich>
-  - <https://github.com/Textualize/rich>
-  - **Notes:**
-    - Site: <https://rich.readthedocs.io/en/latest>
+- **Dariush Tasdighi**
+  - Cell Phone Number: (+98)-9121087461
+  - Email Address: <DariushT@GMail.com>
+  - Telegram ID: <https://t.me/Dariush_Tasdighi>
+  - LinkedIn: <https://www.linkedin.com/in/tasdighi>
+  - Telegram Channels
+    - <https://t.me/IranianExperts>
+    - <https://t.me/DT_PYTHON_LEARNING>
 
-- 'ollama' package:
-  - <https://pypi.org/project/ollama>
-  - <https://github.com/ollama/ollama-python>
-  - **Notes:**
-    - Site: <https://ollama.com>
+## Used Packages
 
-- 'googletrans' package:
-  - <https://pypi.org/project/googletrans>
-  - <https://github.com/ssut/py-googletrans>
+### 'rich' package
 
-- 'dotenv-python' package:
-  - <https://pypi.org/project/dotenv-python>
-  - <https://github.com/TsuiJie/dotenv-python>
+- <https://pypi.org/project/rich>
+- <https://github.com/Textualize/rich>
+- **More:**
+  - Site: <https://rich.readthedocs.io/en/latest>
 
-- 'deep-translator' package:
-  - <https://pypi.org/project/deep-translator>
-  - <https://github.com/nidhaloff/deep-translator>
+### 'ollama' package
+
+- <https://pypi.org/project/ollama>
+- <https://github.com/ollama/ollama-python>
+- **More:**
+  - Site: <https://ollama.com>
+
+### 'googletrans' package
+
+- <https://pypi.org/project/googletrans>
+- <https://github.com/ssut/py-googletrans>
+
+### 'dotenv-python' package
+
+- <https://pypi.org/project/dotenv-python>
+- <https://github.com/TsuiJie/dotenv-python>
+
+### 'deep-translator' package
+
+- <https://pypi.org/project/deep-translator>
+- <https://github.com/nidhaloff/deep-translator>
 
 ## References
 
@@ -37,11 +53,13 @@
 ## Setup Environment
 
 ```bash
-python -m venv .venv
+# python -m venv .venv
+py -3.14 -m venv .venv.3.14
 ```
 
 ```bash
-.\.venv\Scripts\activate
+# .\.venv\Scripts\activate
+.\.venv.3.14\Scripts\activate
 ```
 
 ```bash

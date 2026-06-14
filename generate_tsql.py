@@ -1,4 +1,3 @@
-# **************************************************
 """
 Generate TSQL Assistant (Offline).
 """
@@ -13,14 +12,14 @@ from rich.markdown import Markdown
 
 TEMPERATURE: float = 0
 
-MODEL_NAME: str = "qwen2.5-coder:14b".strip().lower()
+MODEL_NAME: str = "qwen2.5-coder:14b".replace(" ", "").lower()
 
 # SYSTEM_PROMPT: str = "You are a helpful AI assistant."
 
 SYSTEM_PROMPT: str = """
 You are a professional TSQL generator.
 
-User must write just TSQL script based on below structure of tables:
+You must write just TSQL script based on below structure of tables:
 
 Table Name: SaleInvoiceDetails
     Field Name: SaleInvoiceId
@@ -31,6 +30,7 @@ Table Name: SaleInvoiceDetails
     Field Name: Discount
     Field Name: Tax
     Field Name: Weight
+
 Table Name: Products
     Field Name: ProductId
     Field Name: ProductCode

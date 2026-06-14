@@ -2,6 +2,9 @@
 .env
 
 .venv/
+.venv.3.13/
+.venv.3.14/
+
 .vscode/
 __pycache__/
 

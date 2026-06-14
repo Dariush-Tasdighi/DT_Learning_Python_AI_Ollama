@@ -19,33 +19,33 @@
 
 
 # **************************************************
-# import os
-# from ollama import Client
-# from dotenv import load_dotenv
+import os
+from ollama import Client
+from dotenv import load_dotenv
 
-# load_dotenv()
+load_dotenv()
 
-# api_key = os.getenv(key="OLLAMA_API_KEY")
+api_key = os.getenv(key="OLLAMA_API_KEY")
 
-# if not api_key:
-#     print(f"[-] Key not found or is empty!")
-#     exit()
-
-# # client = Client(
-# #     host="http://127.0.0.1:11434",
-# # )
+if not api_key:
+    print(f"[-] Key not found or is empty!")
+    exit()
 
 # client = Client(
-#     host="https://ollama.com",
-#     headers={"Authorization": f"Bearer {api_key}"},
+#     host="http://127.0.0.1:11434",
 # )
 
-# response = client.chat(
-#     model="gpt-oss:20b-cloud",
-#     messages=[{"role": "user", "content": "Tell me a joke."}],
-# )
+client = Client(
+    host="https://ollama.com",
+    headers={"Authorization": f"Bearer {api_key}"},
+)
 
-# print(response.message.content)
+response = client.chat(
+    model="gpt-oss:20b-cloud",
+    messages=[{"role": "user", "content": "Tell me a joke."}],
+)
+
+print(response.message.content)
 # **************************************************
 
 
@@ -131,33 +131,33 @@
 
 
 # **************************************************
-import sys
+# import sys
 
-sys.path.append("..")
+# sys.path.append("..")
 
-import os
-from rich import print
-from dtx_ollama import chat
+# import os
+# from rich import print
+# from dtx_ollama import chat
 
-MODEL_NAME: str = "gemma3:1b".strip().lower()
-# MODEL_NAME: str = "gpt-oss:20b-cloud".strip().lower()
+# MODEL_NAME: str = "gemma3:1b".strip().lower()
+# # MODEL_NAME: str = "gpt-oss:20b-cloud".strip().lower()
 
-os.system(command="cls" if os.name == "nt" else "clear")
+# os.system(command="cls" if os.name == "nt" else "clear")
 
-messages: list[dict] = []
+# messages: list[dict] = []
 
-user_prompt: str = "Tell me a joke."
-user_message: dict = {"role": "user", "content": user_prompt}
-messages.append(user_message)
+# user_prompt: str = "Tell me a joke."
+# user_message: dict = {"role": "user", "content": user_prompt}
+# messages.append(user_message)
 
-assistant_answer, _, _ = chat(
-    messages=messages,
-    model_name=MODEL_NAME,
-)
+# assistant_answer, _, _ = chat(
+#     messages=messages,
+#     model_name=MODEL_NAME,
+# )
 
-print("=" * 50)
-print(assistant_answer)
-print("=" * 50)
+# print("=" * 50)
+# print(assistant_answer)
+# print("=" * 50)
 # **************************************************
 
 
