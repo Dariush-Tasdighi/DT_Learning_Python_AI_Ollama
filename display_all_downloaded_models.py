@@ -1,14 +1,16 @@
 """
-Display all downloaded models using the Ollama API (Service).
+Display all downloaded models using the Ollama service.
 """
 
 # **************************************************
-import os
 import ollama
-from rich import print
-from ollama import ListResponse
 
-os.system(command="cls" if os.name == "nt" else "clear")
+from rich import print
+# لوس‌بازی
+from ollama import ListResponse
+from dt_utility import clear_screen
+
+clear_screen()
 
 ollama_list: ListResponse = ollama.list()
 
@@ -23,12 +25,13 @@ print(ollama_list)
 
 
 # **************************************************
-# import os
 # import ollama
+
 # from rich import print
 # from ollama import ListResponse
+# from dt_utility import clear_screen
 
-# os.system(command="cls" if os.name == "nt" else "clear")
+# clear_screen()
 
 # ollama_list: ListResponse = ollama.list()
 # models = ollama_list.models
@@ -47,12 +50,13 @@ print(ollama_list)
 
 
 # **************************************************
-# import os
 # import ollama
+
 # from rich import print
 # from ollama import ListResponse
+# from dt_utility import clear_screen
 
-# os.system(command="cls" if os.name == "nt" else "clear")
+# clear_screen()
 
 # ollama_list: ListResponse = ollama.list()
 # models = ollama_list.models
@@ -61,7 +65,6 @@ print(ollama_list)
 # for model_item in models:
 #     if model_item.model:
 #         model_names.append(model_item.model)
-
 # model_names.sort()
 
 # for model_name in model_names:
@@ -77,5 +80,38 @@ print(ollama_list)
 # #     index_string: str = str(index).rjust(2, " ")
 # #     print(index_string, model_name)
 
+# # for index, model_name in enumerate(model_names, start=1):
+# #     item: str = f"{index:<2} {model_name}"
+# #     # item: str = f"{index:>2} {model_name}"
+# #     print(item)
+
+# print()
+# **************************************************
+
+
+# **************************************************
+# import ollama
+
+# from rich import print
+# from ollama import ListResponse
+# from dt_utility import clear_screen
+
+# clear_screen()
+# print("=" * 50)
+
+# ollama_list: ListResponse = ollama.list()
+# models = ollama_list.models
+
+# model_names: list[str] = []
+# for model_item in models:
+#     if model_item.model:
+#         model_names.append(model_item.model)
+# model_names.sort()
+
+# for index, model_name in enumerate(model_names, start=1):
+#     item: str = f"{index:>2} {model_name}"
+#     print(item)
+
+# print("=" * 50)
 # print()
 # **************************************************

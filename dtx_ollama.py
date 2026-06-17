@@ -1,48 +1,34 @@
 """
-Dariush Tasdighi Ollama module.
+Dariush Tasdighi Custom 'ollama' Package Module
 """
 
-import logging
-from rich import print
+from typing import Final
+from typing import Optional
+
 from ollama import Client
 from ollama import ChatResponse
-import dt_llm_utility as utility
+
+import logging
+import dt_utility as utility
+import dt_llm_utility as llm_utility
+
 from dtx_dotenv import get_key_value
 
-__version__ = "1.0"
+VERSION: Final[str] = "2.3"
+TEMPERATURE: Final[float] = 0.7
+
+MODEL_NAME: Final[str] = "llama3.2:1b".replace(" ", "").lower()
+BASE_URL_OFFLINE: Final[str] = "http://127.0.0.1:11434".replace(" ", "").lower()
+
+BASE_URL_ONLINE: Final[str] = "https://ollama.com".replace(" ", "").lower()
+KEY_NAME_OLLAMA_API_KEY: Final[str] = "OLLAMA_API_KEY".replace(" ", "").lower()
 
 logger = logging.getLogger(name=__name__)
 logger.addHandler(hdlr=logging.NullHandler())
 
-TEMPERATURE: float = 0.7
-KEY_NAME_OLLAMA_API_KEY: str = "OLLAMA_API_KEY".strip().upper()
 
-MODEL_NAME_OFFLINE: str = "gemma3:1b".strip().lower()
-BASE_URL_OFFLINE: str = "http://127.0.0.1:11434".strip().lower()
-
-MODEL_NAME_ONLINE: str = "gpt-oss:20b-cloud".strip().lower()
-BASE_URL_ONLINE: str = "https://ollama.com".strip().lower()
-
-SYSTEM_PROMPT: str = "You are a helpful AI assistant."
-
-SYSTEM_MESSAGE: dict = {
-    utility.KEY_NAME_ROLE: utility.ROLE_SYSTEM,
-    utility.KEY_NAME_CONTENT: SYSTEM_PROMPT,
-}
-
-
-def get_client_offline(base_url: str = BASE_URL_OFFLINE) -> Client:
-    """Get client (offline)"""
-
-    client = Client(
-        host=base_url,
-    )
-
-    return client
-
-
-def get_client_online() -> Client:
-    """Get client (online)"""
+def get_online_client() -> Client:
+    """Get online client"""
 
     api_key: str = get_key_value(
         key=KEY_NAME_OLLAMA_API_KEY,
@@ -58,19 +44,26 @@ def get_client_online() -> Client:
     return client
 
 
+def get_offline_client(base_url: str = BASE_URL_OFFLINE) -> Client:
+    """Get offline client"""
+
+    client = Client(host=base_url)
+    return client
+
+
 def chat(
     messages: list[dict],
     think: bool = False,
-    base_url: str = BASE_URL_OFFLINE,
-    model_name: str = MODEL_NAME_OFFLINE,
+    model_name: str = MODEL_NAME,
     temperature: float = TEMPERATURE,
-) -> tuple[str | None, int, int]:
-    """Chat with Ollama"""
+    base_url: str = BASE_URL_OFFLINE,
+) -> tuple[Optional[str], int, int]:
+    """Chat with Ollama service."""
 
     if model_name[-5:].lower() == "cloud":
-        client = get_client_online()
+        client = get_online_client()
     else:
-        client = get_client_offline(base_url=base_url)
+        client = get_offline_client(base_url=base_url)
 
     logger.debug(msg=f"Ollama '{model_name}' chat started...")
 
@@ -79,12 +72,12 @@ def chat(
         stream=False,
         model=model_name,
         messages=messages,
-        options={utility.KEY_NAME_TEMPRETURE: temperature},
+        options={llm_utility.KEY_NAME_TEMPRETURE: temperature},
     )
 
     logger.debug(msg=f"Ollama '{model_name}' chat finished.")
 
-    assistant_answer: str | None = response.message.content
+    assistant_answer: Optional[str] = response.message.content
 
     prompt_tokens: int = 0
     completion_tokens: int = 0
@@ -99,4 +92,6 @@ def chat(
 
 
 if __name__ == "__main__":
-    print("[-] This module is not meant to be run directly!")
+    utility.display_just_one_error_message(
+        message=utility.ERROR_MESSAGE_MODULE_IS_NOT_EXECUTED_DIRECTLY,
+    )
