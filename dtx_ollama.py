@@ -27,6 +27,13 @@ logger = logging.getLogger(name=__name__)
 logger.addHandler(hdlr=logging.NullHandler())
 
 
+def get_offline_client(base_url: str = BASE_URL_OFFLINE) -> Client:
+    """Get offline client"""
+
+    client = Client(host=base_url)
+    return client
+
+
 def get_online_client() -> Client:
     """Get online client"""
 
@@ -41,13 +48,6 @@ def get_online_client() -> Client:
         host=BASE_URL_ONLINE,
     )
 
-    return client
-
-
-def get_offline_client(base_url: str = BASE_URL_OFFLINE) -> Client:
-    """Get offline client"""
-
-    client = Client(host=base_url)
     return client
 
 

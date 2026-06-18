@@ -42,6 +42,8 @@ print(ollama_list)
 
 #     # print(model_item.model)
 
+#     # print(f"{model_item.model} - {model_item.details.parameter_size}")
+
 #     # if not model_item.details:
 #     #     print(f"[-] {model_item.model}")
 #     # else:
@@ -78,6 +80,7 @@ print(ollama_list)
 
 # # for index, model_name in enumerate(model_names, start=1):
 # #     index_string: str = str(index).rjust(2, " ")
+# #     # index_string: str = str(index).ljust(2, " ")
 # #     print(index_string, model_name)
 
 # # for index, model_name in enumerate(model_names, start=1):

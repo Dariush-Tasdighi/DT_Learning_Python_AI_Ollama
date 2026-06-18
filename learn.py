@@ -926,15 +926,6 @@ print()
 
 
 # **************************************************
-# **************************************************
-# **************************************************
-# تا اینجا کد اصلاح شده است
-# **************************************************
-# **************************************************
-# **************************************************
-
-
-# **************************************************
 # Step (15) - Best Practice (2)
 # **************************************************
 # import time
@@ -953,6 +944,7 @@ print()
 # from dt_utility import format_seconds
 
 # USER_QUESTION: Final[str] = "User: "
+
 # EXIT_COMMANDS: Final[list[str]] = [
 #     "bye".replace(" ", "").lower(),
 #     "exit".replace(" ", "").lower(),
@@ -987,9 +979,7 @@ print()
 
 # # NEW
 # def display_error_message(message: str) -> None:
-#     """
-#     Display an error message
-#     """
+#     """Display an error message"""
 
 #     # message = fix_text(text=message)
 #     result: str = f"[red bold][-] {message}![/red bold]"
@@ -998,9 +988,7 @@ print()
 
 # # NEW
 # def display_warning_message(message: str) -> None:
-#     """
-#     Display an warning message
-#     """
+#     """Display an warning message"""
 
 #     # message = fix_text(text=message)
 #     result: str = f"[yellow bold][!] {message}![/yellow bold]"
@@ -1149,6 +1137,7 @@ print()
 # from rich.markdown import Markdown
 
 # # NEW
+# # from dt_utility import clear_screen, format_seconds
 # # from dt_utility import clear_screen
 # # from dt_utility import format_seconds
 # from dt_utility import (
@@ -1160,6 +1149,7 @@ print()
 # )
 
 # USER_QUESTION: Final[str] = "User: "
+
 # EXIT_COMMANDS: Final[list[str]] = [
 #     "bye".replace(" ", "").lower(),
 #     "exit".replace(" ", "").lower(),
@@ -1230,7 +1220,7 @@ print()
 #     completion_tokens: int = 0
 
 #     # NEW
-#     # شرط ذیل برای حلال و حرام است
+#     # شرط ذیل، برای حلال و حرام است
 #     if assistant_answer:
 #         if response.eval_count:
 #             completion_tokens = response.eval_count
@@ -1239,6 +1229,7 @@ print()
 
 #     # NEW
 #     return assistant_answer, prompt_tokens, completion_tokens
+#     # return (assistant_answer, prompt_tokens, completion_tokens)
 
 
 # def main() -> None:
@@ -1383,16 +1374,28 @@ print()
 #         elapsed_time: float = end_time - start_time
 #         formatted_elapsed_time: str = format_seconds(seconds=elapsed_time)
 
-#         if not assistant_answer:
-#             messages.pop()
-#             assistant_answer = llm_utility.MESSAGE_NO_CONTENT_RECEIVED
-#         else:
+#         # if not assistant_answer:
+#         #     messages.pop()
+#         #     assistant_answer = llm_utility.MESSAGE_NO_CONTENT_RECEIVED
+#         # else:
+#         #     assistant_message: dict = {
+#         #         llm_utility.KEY_NAME_ROLE: llm_utility.ROLE_ASSISTANT,
+#         #         llm_utility.KEY_NAME_CONTENT: assistant_answer,
+#         #     }
+
+#         #     messages.append(assistant_message)
+
+#         # با تشکر از امیرحسین مرجانی
+#         if assistant_answer:
 #             assistant_message: dict = {
 #                 llm_utility.KEY_NAME_ROLE: llm_utility.ROLE_ASSISTANT,
 #                 llm_utility.KEY_NAME_CONTENT: assistant_answer,
 #             }
 
 #             messages.append(assistant_message)
+#         else:
+#             messages.pop()
+#             assistant_answer = llm_utility.MESSAGE_NO_CONTENT_RECEIVED
 
 #         print("-" * 50)
 #         console = Console()

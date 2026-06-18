@@ -70,30 +70,6 @@ python -m pip install -r .\requirements.txt -U
 python -m pip list
 ```
 
-```bash
-python -m pip install -U pip
-```
-
-```bash
-python -m pip install -U rich
-```
-
-```bash
-python -m pip install -U ollama
-```
-
-```bash
-python -m pip install -U python-dotenv
-```
-
-```bash
-python -m pip install -U deep-translator
-```
-
-```bash
-python -m pip list
-```
-
 Now! We Create / Modify / Delete / Run the Source Codes...
 
 ```bash

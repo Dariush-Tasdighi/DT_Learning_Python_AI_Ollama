@@ -35,6 +35,10 @@ if not api_key:
 #     host="http://127.0.0.1:11434",
 # )
 
+# client = Client(
+#     host="http://192.168.10.15:11434",
+# )
+
 client = Client(
     host="https://ollama.com",
     headers={"Authorization": f"Bearer {api_key}"},

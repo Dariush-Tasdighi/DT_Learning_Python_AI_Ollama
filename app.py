@@ -48,32 +48,32 @@ def main() -> None:
 
         start_time: float = time.perf_counter()
 
-        # assistant_answer, prompt_tokens, completion_tokens = ollama.chat(
-        #     # NEW
-        #     # notify=True,
-        #     messages=messages,
-        # )
-
         assistant_answer, prompt_tokens, completion_tokens = ollama.chat(
-            messages=messages,
             # NEW
-            model_name="gpt-oss:20b-cloud",
+            # notify=True,
+            messages=messages,
         )
+
+        # assistant_answer, prompt_tokens, completion_tokens = ollama.chat(
+        #     messages=messages,
+        #     # NEW
+        #     model_name="gpt-oss:20b-cloud",
+        # )
 
         end_time: float = time.perf_counter()
         elapsed_time: float = end_time - start_time
         formatted_elapsed_time: str = format_seconds(seconds=elapsed_time)
 
-        if not assistant_answer:
-            messages.pop()
-            assistant_answer = llm_utility.MESSAGE_NO_CONTENT_RECEIVED
-        else:
+        if assistant_answer:
             assistant_message: dict = {
                 llm_utility.KEY_NAME_ROLE: llm_utility.ROLE_ASSISTANT,
                 llm_utility.KEY_NAME_CONTENT: assistant_answer,
             }
 
             messages.append(assistant_message)
+        else:
+            messages.pop()
+            assistant_answer = llm_utility.MESSAGE_NO_CONTENT_RECEIVED
 
         print("-" * 50)
         console = Console()
