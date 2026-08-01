@@ -9,7 +9,7 @@ from ollama import ListResponse
 from dt_utility import clear_screen
 
 clear_screen()
-print("=" * 50)
+print("=" * 70)
 
 ollama_list: ListResponse = ollama.list()
 models = ollama_list.models
@@ -20,10 +20,12 @@ for model_item in models:
         model_names.append(model_item.model)
 model_names.sort()
 
+print("[blue bold] Updating all downloaded models...[/blue bold]")
+print("-" * 70)
 for index, model_name in enumerate(model_names, start=1):
-    item: str = f"{index:>2} Updating Model: '{model_name}'..."
+    item: str = f"{index:>2} Updating Model: [green bold]{model_name:.<51}[/green bold]"
     print(item)
     ollama.pull(model=model_name)
 
-print("=" * 50)
+print("=" * 70)
 print()

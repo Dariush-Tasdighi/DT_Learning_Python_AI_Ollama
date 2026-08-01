@@ -1,23 +1,33 @@
 """
-Dariush Tasdighi file utility module.
+Dariush Tasdighi File Utility Module
 """
 
 import os
 import json
-from typing import Any
+import dt_utility as utility
 
-__version__ = "1.0"
+from typing import (
+    Any,
+    Final,
+    Optional,
+)
+
+VERSION: Final[str] = "1.0.2"
 
 
 def save_text_file(text: str, file_path: str) -> None:
-    """Save text file"""
+    """
+    Save text file
+    """
 
     with open(file=file_path, mode="wt", encoding="utf-8") as file:
         file.write(text)
 
 
-def load_text_file(file_path: str) -> str | None:
-    """Load text file"""
+def load_text_file(file_path: str) -> Optional[str]:
+    """
+    Load text file
+    """
 
     if not os.path.exists(path=file_path):
         return None
@@ -31,7 +41,9 @@ def load_text_file(file_path: str) -> str | None:
 
 
 def serialize(obj) -> str:
-    """Serialize"""
+    """
+    Serialize object
+    """
 
     json_string: str = json.dumps(
         obj,
@@ -43,7 +55,9 @@ def serialize(obj) -> str:
 
 
 def serialize_and_save(obj, file_path: str) -> None:
-    """Serialize and save"""
+    """
+    Serialize object and save it to file
+    """
 
     json_string: str = serialize(obj=obj)
 
@@ -54,16 +68,20 @@ def serialize_and_save(obj, file_path: str) -> None:
 
 
 def deserialize(json_string: str) -> Any:
-    """Deserialize"""
+    """
+    Deserialize string
+    """
 
     result = json.loads(s=json_string)
     return result
 
 
 def load_and_deserialize(file_path: str) -> Any:
-    """Load and deserialize"""
+    """
+    Load file and deserialize
+    """
 
-    text: str | None = load_text_file(file_path=file_path)
+    text: Optional[str] = load_text_file(file_path=file_path)
 
     if text == None:
         return None
@@ -73,4 +91,6 @@ def load_and_deserialize(file_path: str) -> Any:
 
 
 if __name__ == "__main__":
-    print("[-] This module is not meant to be run directly!\n")
+    utility.display_just_one_error_message(
+        message=utility.ERROR_MESSAGE_MODULE_IS_NOT_EXECUTED_DIRECTLY,
+    )

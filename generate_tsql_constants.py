@@ -8,11 +8,13 @@ TEMPERATURE: float = 0
 
 # MODEL_NAME: str = "llama3.2:1b".strip().lower()  # هیچ جوابی نمی‌دهد
 # MODEL_NAME: str = "llama3.2:3b".strip().lower() # نسبتا دری وری جواب می‌دهد
-MODEL_NAME: str = "llama3.1:8b".strip().lower()  # تقریبا جواب خوبی می‌دهد
+# MODEL_NAME: str = "llama3.1:8b".strip().lower()  # تقریبا جواب خوبی می‌دهد
 # MODEL_NAME: str = "gemma3:1b".strip().lower()  # دری وری جواب می‌دهد
 # MODEL_NAME: str = "gemma3:4b".strip().lower()  # دری وری جواب می‌دهد
 # MODEL_NAME: str = "gemma3:12b".strip().lower()  # عالی انجام می‌دهد
+# MODEL_NAME: str = "qwen2.5-coder:14b".replace(" ", "").lower()
 
+MODEL_NAME: str = "qwen2.5-coder:1.5b".replace(" ", "").lower()
 # SYSTEM_PROMPT: str = "You are a helpful AI assistant."
 
 SYSTEM_PROMPT: str = """

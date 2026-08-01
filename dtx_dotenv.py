@@ -6,11 +6,13 @@ import os
 import logging
 import dt_utility as utility
 
-from typing import Final
-from typing import Optional
+from typing import (
+    Final,
+    Optional,
+)
 from dotenv import load_dotenv
 
-VERSION: Final[str] = "1.5"
+VERSION: Final[str] = "1.5.4"
 
 logger = logging.getLogger(name=__name__)
 logger.addHandler(hdlr=logging.NullHandler())
@@ -28,9 +30,9 @@ def get_key_value(key: str) -> str:
     value: Optional[str] = os.getenv(key=key)
 
     if not value:
-        error_message: str = f"The key '{key}' not found or is empty"
-        logger.error(msg=error_message)
-        raise Exception(error_message)
+        message: str = f"The key '{key}' not found or is empty"
+        logger.error(msg=message)
+        raise Exception(message)
 
     logger.debug(msg=f"The key '{key}' value is valid.")
 

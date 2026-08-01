@@ -8,18 +8,18 @@ import dt_utility as utility
 from typing import Final
 from rich.logging import RichHandler
 
-VERSION: Final[str] = "1.7"
+VERSION: Final[str] = "1.8.0"
 
 FILE_MODE: Final[str] = "at"
 FILE_ENCODING: Final[str] = "utf-8"
 DATE_FORMAT: Final[str] = "%Y-%m-%d %H:%M:%S"
 
 CONSOLE_FORMAT: Final[str] = (
-    "%(asctime)s,%(msecs)3d [%(filename)s:%(lineno) 3d] - %(message)s"
+    "%(asctime)s,%(msecs)03d [%(filename)s:%(lineno)04d] - %(message)s"
 )
 
 FILE_FORMAT: Final[str] = (
-    "[%(levelname)-8s] %(asctime)s,%(msecs)3d [%(filename)s:%(lineno) 3d] - %(message)s"
+    "[%(levelname)-8s] %(asctime)s,%(msecs)03d [%(filename)s:%(lineno)04d] - %(message)s"
 )
 
 

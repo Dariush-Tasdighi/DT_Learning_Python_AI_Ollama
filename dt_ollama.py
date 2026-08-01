@@ -11,7 +11,7 @@ from ollama import ChatResponse
 import dt_utility as utility
 import dt_llm_utility as llm_utility
 
-VERSION: Final[str] = "2.3"
+VERSION: Final[str] = "2.4.0"
 
 TEMPERATURE: Final[float] = 0.7
 MODEL_NAME: Final[str] = "llama3.2:1b".replace(" ", "").lower()

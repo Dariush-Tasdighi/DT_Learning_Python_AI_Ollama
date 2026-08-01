@@ -5,11 +5,15 @@ Dariush Tasdighi Utility Module
 import os
 import subprocess
 
+from typing import (
+    Final,
+    Optional,
+)
 from rich import print
-from typing import Final
-from typing import Optional
+from datetime import datetime
 
-VERSION: Final[str] = "1.4"
+VERSION: Final[str] = "1.8.1"
+
 ERROR_MESSAGE_MODULE_IS_NOT_EXECUTED_DIRECTLY: Final[str] = (
     "This module is designed to be imported, not executed directly"
 )
@@ -21,10 +25,27 @@ def clear_screen() -> None:
     """
 
     subprocess.run(
-        check=True,
         shell=True,
+        check=True,
+        capture_output=False,
         args="cls" if os.name == "nt" else "clear",
     )
+
+
+def display_divider(character: str = "-", count: int = 50) -> None:
+    """
+    Display a divider
+    """
+
+    print(character * count)
+
+
+def display_main_divider() -> None:
+    """
+    Display a main divider
+    """
+
+    display_divider(character="=", count=50)
 
 
 def fix_text(text: Optional[str]) -> str:
@@ -45,12 +66,32 @@ def fix_text(text: Optional[str]) -> str:
     return text
 
 
+def get_word_count(text: str) -> int:
+    """
+    Get word count
+    """
+
+    result: int = len(text.split(" "))
+    return result
+
+
+def display_title_message(message: str) -> None:
+    """
+    Display an title message
+    """
+
+    message = fix_text(text=message).title()
+    result: str = f"[blue bold]{message}[/blue bold]"
+    print(result)
+
+
 def display_error_message(message: str) -> None:
     """
     Display an error message
     """
 
     message = fix_text(text=message)
+
     if not message.endswith("!"):
         message += "!"
 
@@ -64,6 +105,7 @@ def display_success_message(message: str) -> None:
     """
 
     message = fix_text(text=message)
+
     if not message.endswith("."):
         message += "."
 
@@ -73,10 +115,11 @@ def display_success_message(message: str) -> None:
 
 def display_warning_message(message: str) -> None:
     """
-    Display an warning message
+    Display a warning message
     """
 
     message = fix_text(text=message)
+
     if not message.endswith("!"):
         message += "!"
 
@@ -90,6 +133,7 @@ def display_information_message(message: str) -> None:
     """
 
     message = fix_text(text=message)
+
     if not message.endswith("."):
         message += "."
 
@@ -105,6 +149,7 @@ def display_just_one_error_message(message: str) -> None:
     clear_screen()
 
     message = fix_text(text=message)
+
     if not message.endswith("!"):
         message += "!"
 
@@ -115,6 +160,23 @@ def display_just_one_error_message(message: str) -> None:
     print(f"[red bold]{message}[/red bold]")
     print("=" * message_length)
     print()
+
+
+def get_formated_now(with_miliseconds: bool = False) -> str:
+    """
+    Get formated now
+    """
+
+    now = datetime.now()
+
+    formated_now: str
+
+    if not with_miliseconds:
+        formated_now = now.strftime(format="%Y_%m_%d_%H_%M_%S")
+    else:
+        formated_now = now.strftime(format="%Y_%m_%d_%H_%M_%S_%f")[:-3]
+
+    return formated_now
 
 
 def format_seconds(seconds: float, display_milliseconds: bool = True) -> str:

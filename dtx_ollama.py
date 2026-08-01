@@ -2,19 +2,24 @@
 Dariush Tasdighi Custom 'ollama' Package Module
 """
 
-from typing import Final
-from typing import Optional
-
-from ollama import Client
-from ollama import ChatResponse
-
 import logging
 import dt_utility as utility
 import dt_llm_utility as llm_utility
 
+from ollama import (
+    Client,
+    ChatResponse,
+)
+
+from typing import (
+    Final,
+    Optional,
+)
+
 from dtx_dotenv import get_key_value
 
-VERSION: Final[str] = "2.3"
+VERSION: Final[str] = "2.3.1"
+
 TEMPERATURE: Final[float] = 0.7
 
 MODEL_NAME: Final[str] = "llama3.2:1b".replace(" ", "").lower()

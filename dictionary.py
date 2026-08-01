@@ -6,24 +6,27 @@ This is a simple dictionary assistant that translates English words to Farsi lan
 
 import os
 import time
-from rich import print
 import dt_ollama as ollama
 import dt_llm_utility as utility
+
+from rich import print
+from typing import Final
 from rich.console import Console
 from rich.markdown import Markdown
+from dt_utility import clear_screen
 
-TEMPERATURE: float = 0
+TEMPERATURE: Final[float] = 0
 
-# MODEL_NAME: str = "llama3.2:1b".strip().lower()  # هیچ جوابی نمی‌دهد
-# MODEL_NAME: str = "llama3.2:3b".strip().lower()  # نسبتا دری وری جواب می‌دهد
-MODEL_NAME: str = "llama3.1:8b".strip().lower()  # تقریبا جواب خوبی می‌دهد
-# MODEL_NAME: str = "gemma3:1b".strip().lower()  # دری وری جواب می‌دهد
-# MODEL_NAME: str = "gemma3:4b".strip().lower()  # دری وری جواب می‌دهد
-# MODEL_NAME: str = "gemma3:12b".strip().lower()  # عالی انجام می‌دهد
+# MODEL_NAME: Final[str] = "llama3.2:1b".strip().lower()  # هیچ جوابی نمی‌دهد
+# MODEL_NAME: Final[str] = "llama3.2:3b".strip().lower()  # نسبتا دری وری جواب می‌دهد
+# MODEL_NAME: Final[str] = "llama3.1:8b".strip().lower()  # تقریبا جواب خوبی می‌دهد
+# MODEL_NAME: Final[str] = "gemma3:1b".strip().lower()  # دری وری جواب می‌دهد
+# MODEL_NAME: Final[str] = "gemma3:4b".strip().lower()  # دری وری جواب می‌دهد
+MODEL_NAME: Final[str] = "gemma3:12b".strip().lower()  # عالی انجام می‌دهد
 
-# SYSTEM_PROMPT: str = "You are a helpful AI assistant."
+# SYSTEM_PROMPT: Final[str] = "You are a helpful AI assistant."
 
-SYSTEM_PROMPT: str = """
+SYSTEM_PROMPT: Final[str] = """
 You are a professional translator assistant from English language to Farsi language.
 
 User must write just one word in English language.
@@ -65,7 +68,7 @@ Two Sample Sentences:
 2) ######
 """
 
-SYSTEM_PROMPT = SYSTEM_PROMPT.strip()
+# SYSTEM_PROMPT = SYSTEM_PROMPT.strip()
 SYSTEM_MESSAGE: dict = {
     utility.KEY_NAME_ROLE: utility.ROLE_SYSTEM,
     utility.KEY_NAME_CONTENT: SYSTEM_PROMPT,
@@ -73,18 +76,20 @@ SYSTEM_MESSAGE: dict = {
 
 
 def main() -> None:
-    """The main of program"""
+    """
+    Main function
+    """
 
-    os.system(command="cls" if os.name == "nt" else "clear")
+    clear_screen()
 
     while True:
         print("=" * 50)
-        user_prompt: str = input(utility.QUESTION_PROMPT)
+        user_prompt: str = input(utility.USER_QUESTION)
 
         if user_prompt.lower() in utility.EXIT_COMMANDS:
             break
 
-        os.system(command="cls" if os.name == "nt" else "clear")
+        clear_screen()
 
         messages: list[dict] = []
         messages.append(SYSTEM_MESSAGE)

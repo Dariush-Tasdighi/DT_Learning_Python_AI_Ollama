@@ -1,18 +1,21 @@
 # **************************************************
 # Step (1)
 # **************************************************
-import ollama
+# import ollama
 
-from rich import print
-from dt_utility import clear_screen
+# from rich import print
+# from dt_utility import (
+#     clear_screen,
+#     display_main_divider,
+# )
 
-clear_screen()
+# clear_screen()
 
-print("=" * 50)
-# همان‌طور که قبلا گفتم، دستور ذیل، همیشه کار نمی‌کند
-# print(f"Version of 'ollama' package: {ollama.__version__}")
-print("=" * 50)
-print()
+# display_main_divider()
+# # همان‌طور که قبلا گفتم، دستور ذیل، همیشه کار نمی‌کند
+# # print(f"Version of 'ollama' package: {ollama.__version__}")
+# display_main_divider()
+# print()
 # **************************************************
 
 
@@ -60,7 +63,11 @@ print()
 # import ollama
 
 # from rich import print
-# from dt_utility import clear_screen
+# from dt_utility import (
+#     clear_screen,
+#     display_divider,
+#     display_main_divider,
+# )
 
 # clear_screen()
 
@@ -69,11 +76,11 @@ print()
 #     prompt="Tell me a joke.",
 # )
 
-# print("=" * 50)
+# display_main_divider()
 # print(generate_completion)
-# print("-" * 50)
+# display_divider()
 # print(generate_completion.response)
-# print("=" * 50)
+# display_main_divider()
 # print()
 # **************************************************
 
@@ -84,7 +91,10 @@ print()
 # import ollama
 
 # from rich import print
-# from dt_utility import clear_screen
+# from dt_utility import (
+#     clear_screen,
+#     display_main_divider,
+# )
 
 # clear_screen()
 
@@ -94,9 +104,9 @@ print()
 #     messages=[{"role": "user", "content": "Tell me a joke."}],
 # )
 
-# print("=" * 50)
+# display_main_divider()
 # print(response)
-# print("=" * 50)
+# display_main_divider()
 # print()
 # **************************************************
 
@@ -138,9 +148,13 @@ print()
 
 # from rich import print
 # from typing import Final
-# from dt_utility import clear_screen
+# from dt_utility import (
+#     clear_screen,
+#     display_divider,
+#     display_main_divider,
+# )
 
-# # NEW: لوس‌بازی
+# # NEW: لوس بازی
 # from ollama import ChatResponse
 
 # # NEW
@@ -162,13 +176,12 @@ print()
 #     messages=messages,
 # )
 
-# print("=" * 50)
+# display_main_divider()
+# print(response["message"]["content"])
+# display_divider()
 # # NEW:‌ ‌Best Practice
 # print(response.message.content)
-# print("-" * 50)
-# # NEW: Bad Practice
-# print(response["message"]["content"])
-# print("=" * 50)
+# display_main_divider()
 # print()
 # **************************************************
 
@@ -178,8 +191,11 @@ print()
 # **************************************************
 # from rich import print
 # from typing import Final
+# from dt_utility import (
+#     clear_screen,
+#     display_main_divider,
+# )
 # from ollama import ChatResponse
-# from dt_utility import clear_screen
 
 # # NEW
 # # import ollama
@@ -212,9 +228,9 @@ print()
 #     messages=messages,
 # )
 
-# print("=" * 50)
+# display_main_divider()
 # print(response.message.content)
-# print("=" * 50)
+# display_main_divider()
 # print()
 # **************************************************
 
@@ -222,14 +238,19 @@ print()
 # **************************************************
 # Step (6) - 'rich': Markdown
 # **************************************************
+# from ollama import (
+#     Client,
+#     ChatResponse,
+# )
 # from rich import print
 # from typing import Final
-# from ollama import Client
-# from ollama import ChatResponse
-# from dt_utility import clear_screen
+# from dt_utility import (
+#     clear_screen,
+#     display_main_divider,
+# )
+# from typing import Optional
 
 # # NEW
-# from typing import Optional
 # from rich.console import Console
 # from rich.markdown import Markdown
 
@@ -254,21 +275,19 @@ print()
 #     messages=messages,
 # )
 
-# # NEW
-# # assistant_answer: str | None = response.message.content
 # assistant_answer: Optional[str] = response.message.content
 
 # # NEW
 # if not assistant_answer:
 #     assistant_answer = "[red][bold][-][/bold] No content received![/red]"
 
-# print("=" * 50)
+# display_main_divider()
 # # NEW
 # print(assistant_answer)
 # # console = Console()
 # # markdown = Markdown(markup=assistant_answer)
 # # console.print(markdown)
-# print("=" * 50)
+# display_main_divider()
 # print()
 # **************************************************
 
@@ -276,55 +295,67 @@ print()
 # **************************************************
 # Step (7) - Temperature
 # **************************************************
-# from typing import Final
-# from typing import Optional
+from ollama import (
+    Client,
+    ChatResponse,
+)
 
-# from ollama import Client
-# from ollama import ChatResponse
+from typing import (
+    Final,
+    Optional,
+)
 
-# from rich import print
-# from rich.console import Console
-# from rich.markdown import Markdown
+from dt_utility import (
+    clear_screen,
+    display_main_divider,
+)
 
-# from dt_utility import clear_screen
+from rich import print
+from rich.console import Console
+from rich.markdown import Markdown
 
-# # NEW
-# TEMPERATURE: Final[float] = 0.7
+# NEW
+TEMPERATURE: Final[float] = 0.8
 
-# MODEL_NAME: Final[str] = "gemma3:1b".replace(" ", "").lower()
-# BASE_URL: Final[str] = "http://127.0.0.1:11434".replace(" ", "").lower()
+MODEL_NAME: Final[str] = "gemma3:1b".replace(" ", "").lower()
+BASE_URL: Final[str] = "http://127.0.0.1:11434".replace(" ", "").lower()
 
-# clear_screen()
+clear_screen()
 
-# messages: list[dict] = []
+messages: list[dict] = []
 
-# # NEW: Change 'user_prompt' value
-# user_prompt: str = "Tell me a long science fiction story."
+# NEW: Change 'user_prompt' value
+user_prompt: str = "Tell me a long science fiction story."
 
-# user_message: dict = {"role": "user", "content": user_prompt}
-# messages.append(user_message)
+user_message: dict = {"role": "user", "content": user_prompt}
+messages.append(user_message)
 
-# client = Client(host=BASE_URL)
+client = Client(host=BASE_URL)
 
-# response: ChatResponse = client.chat(
-#     stream=False,
-#     model=MODEL_NAME,
-#     messages=messages,
-#     # NEW
-#     options={"temperature": TEMPERATURE},
-# )
+response: ChatResponse = client.chat(
+    stream=False,
+    model=MODEL_NAME,
+    messages=messages,
+    # NEW
+    options={"temperature": TEMPERATURE},
+)
 
-# assistant_answer: Optional[str] = response.message.content
+assistant_answer: Optional[str] = response.message.content
 
-# if not assistant_answer:
-#     assistant_answer = "[red][bold][-][/bold] No content received![/red]"
+if not assistant_answer:
+    assistant_answer = "[red][bold][-][/bold] No content received![/red]"
 
-# print("=" * 50)
-# console = Console()
-# markdown = Markdown(markup=assistant_answer)
-# console.print(markdown)
-# print("=" * 50)
-# print()
+display_main_divider()
+console = Console()
+markdown = Markdown(markup=assistant_answer)
+console.print(markdown)
+display_main_divider()
+print()
+# **************************************************
+
+
+# **************************************************
+# **************************************************
 # **************************************************
 
 

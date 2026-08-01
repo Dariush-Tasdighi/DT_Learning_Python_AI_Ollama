@@ -20,7 +20,7 @@ def main() -> None:
 
     while True:
         print("=" * 50)
-        user_prompt: str = input(utility.QUESTION_PROMPT)
+        user_prompt: str = input(utility.USER_QUESTION)
         user_prompt: str = """
 یک مدل می‌خواهم به نام کاربر با ویژگی‌های ذیل
 نام

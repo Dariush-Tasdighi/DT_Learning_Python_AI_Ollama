@@ -5,7 +5,8 @@ Dictionary constants module.
 import dt_llm_utility as utility
 
 TEMPERATURE: float = 0.2
-MODEL_NAME: str = "qwen2.5-coder:14b".strip().lower()
+# MODEL_NAME: str = "qwen2.5-coder:14b".replace(" ", "").lower()
+MODEL_NAME: str = "qwen2.5-coder:1.5b".replace(" ", "").lower()
 
 SYSTEM_PROMPT: str = """
 You are a perfect developer with C# and .NET 9.

@@ -123,6 +123,7 @@ if __name__ == "__main__":
 # [SET JUST IN CURRENT POWERSHELL SESSION]
 # > $env:HTTP_PROXY="socks5://127.0.0.1:10808"
 # > $env:HTTPS_PROXY="socks5://127.0.0.1:10808"
+# > $env:ALL_PROXY="socks5://127.0.0.1:10808"
 #
 # [DISPLAY]
 # > $env:HTTP_PROXY

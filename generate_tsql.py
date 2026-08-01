@@ -12,7 +12,8 @@ from rich.markdown import Markdown
 
 TEMPERATURE: float = 0
 
-MODEL_NAME: str = "qwen2.5-coder:14b".replace(" ", "").lower()
+# MODEL_NAME: str = "qwen2.5-coder:14b".replace(" ", "").lower()
+MODEL_NAME: str = "qwen2.5-coder:1.5b".replace(" ", "").lower()
 
 # SYSTEM_PROMPT: str = "You are a helpful AI assistant."
 

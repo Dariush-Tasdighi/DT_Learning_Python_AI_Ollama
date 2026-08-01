@@ -5,7 +5,7 @@ Dariush Tasdighi LLM Utility Module
 from typing import Final
 import dt_utility as utility
 
-VERSION: Final[str] = "2.3"
+VERSION: Final[str] = "2.3.1"
 
 USER_QUESTION: Final[str] = "User: "
 
