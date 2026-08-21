@@ -3,7 +3,6 @@
 Simple Chatbot using Ollama service
 """
 
-import time
 import dt_llm_utility as llm_utility
 
 # NEW
@@ -13,6 +12,8 @@ import dtx_ollama as ollama
 from dt_utility import (
     clear_screen,
     format_seconds,
+    display_divider,
+    display_main_divider,
     display_error_message,
     display_warning_message,
 )
@@ -23,7 +24,7 @@ from rich.markdown import Markdown
 
 
 def main() -> None:
-    """The main of program"""
+    """Main function"""
 
     clear_screen()
 
@@ -31,12 +32,17 @@ def main() -> None:
     messages.append(llm_utility.SYSTEM_MESSAGE)
 
     while True:
-        print("=" * 50)
+        display_main_divider()
         user_prompt: str = input(llm_utility.USER_QUESTION).strip()
+
+        if user_prompt == "":
+            display_main_divider()
+            print()
+            continue
 
         if user_prompt.lower() in llm_utility.EXIT_COMMANDS:
             display_warning_message(message=llm_utility.MESSAGE_GOODBYE)
-            print("=" * 50)
+            display_main_divider()
             break
 
         user_message: dict = {
@@ -46,22 +52,18 @@ def main() -> None:
 
         messages.append(user_message)
 
-        start_time: float = time.perf_counter()
-
-        assistant_answer, prompt_tokens, completion_tokens = ollama.chat(
+        assistant_answer, elapsed_time, prompt_tokens, completion_tokens = ollama.chat(
             # NEW
             # notify=True,
             messages=messages,
         )
 
-        # assistant_answer, prompt_tokens, completion_tokens = ollama.chat(
+        # assistant_answer, elapsed_time, prompt_tokens, completion_tokens = ollama.chat(
         #     messages=messages,
         #     # NEW
         #     model_name="gpt-oss:20b-cloud",
         # )
 
-        end_time: float = time.perf_counter()
-        elapsed_time: float = end_time - start_time
         formatted_elapsed_time: str = format_seconds(seconds=elapsed_time)
 
         if assistant_answer:
@@ -75,17 +77,17 @@ def main() -> None:
             messages.pop()
             assistant_answer = llm_utility.MESSAGE_NO_CONTENT_RECEIVED
 
-        print("-" * 50)
+        display_divider()
         console = Console()
         markdown = Markdown(markup=assistant_answer)
         console.print(markdown)
-        print("-" * 50)
+        display_divider()
         print(f"Elapsed Time: {formatted_elapsed_time}")
-        print("-" * 50)
+        display_divider()
         print(f"Prompt Tokens (Input): {prompt_tokens}")
-        print("-" * 50)
+        display_divider()
         print(f"Completion Tokens (Output): {completion_tokens}")
-        print("=" * 50)
+        display_main_divider()
         print()
 
 
@@ -95,12 +97,12 @@ if __name__ == "__main__":
 
     except KeyboardInterrupt:
         print()
-        print("=" * 50)
+        display_main_divider()
 
     except Exception as exception:
-        print()
+        display_divider()
         display_error_message(message=str(exception))
-        print("=" * 50)
+        display_main_divider()
 
     finally:
         print()

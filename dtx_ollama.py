@@ -2,6 +2,7 @@
 Dariush Tasdighi Custom 'ollama' Package Module
 """
 
+import time
 import logging
 import dt_utility as utility
 import dt_llm_utility as llm_utility
@@ -18,7 +19,7 @@ from typing import (
 
 from dtx_dotenv import get_key_value
 
-VERSION: Final[str] = "2.3.1"
+VERSION: Final[str] = "3.0.1"
 
 TEMPERATURE: Final[float] = 0.7
 
@@ -62,7 +63,7 @@ def chat(
     model_name: str = MODEL_NAME,
     temperature: float = TEMPERATURE,
     base_url: str = BASE_URL_OFFLINE,
-) -> tuple[Optional[str], int, int]:
+) -> tuple[Optional[str], float, int, int]:
     """Chat with Ollama service."""
 
     if model_name[-5:].lower() == "cloud":
@@ -72,6 +73,8 @@ def chat(
 
     logger.debug(msg=f"Ollama '{model_name}' chat started...")
 
+    start_time: float = time.perf_counter()
+
     response: ChatResponse = client.chat(
         think=think,
         stream=False,
@@ -79,6 +82,9 @@ def chat(
         messages=messages,
         options={llm_utility.KEY_NAME_TEMPRETURE: temperature},
     )
+
+    end_time: float = time.perf_counter()
+    elapsed_time: float = end_time - start_time
 
     logger.debug(msg=f"Ollama '{model_name}' chat finished.")
 
@@ -88,12 +94,12 @@ def chat(
     completion_tokens: int = 0
 
     if assistant_answer:
-        if response.eval_count:
+        if response.eval_count is not None:
             completion_tokens = response.eval_count
-        if response.prompt_eval_count:
+        if response.prompt_eval_count is not None:
             prompt_tokens = response.prompt_eval_count
 
-    return assistant_answer, prompt_tokens, completion_tokens
+    return assistant_answer, elapsed_time, prompt_tokens, completion_tokens
 
 
 if __name__ == "__main__":
