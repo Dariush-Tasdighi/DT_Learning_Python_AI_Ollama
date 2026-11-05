@@ -3,11 +3,11 @@
 Simple Chatbot using Ollama service
 """
 
-import dt_llm_utility as llm_utility
-
 # NEW
 # import dt_ollama as ollama
 import dtx_ollama as ollama
+
+import dt_lm as llm_utility
 
 from dt_utility import (
     clear_screen,

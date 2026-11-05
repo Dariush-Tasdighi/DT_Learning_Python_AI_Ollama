@@ -7,7 +7,7 @@ This is a simple dictionary assistant that translates English words to Farsi lan
 import os
 import time
 import dt_ollama as ollama
-import dt_llm_utility as utility
+import dt_lm as utility
 
 from rich import print
 from typing import Final

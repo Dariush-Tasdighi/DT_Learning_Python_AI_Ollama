@@ -1,21 +1,21 @@
 # **************************************************
-# Step (1)
-# **************************************************
-# import ollama
+import ollama
 
-# from rich import print
-# from dt_utility import (
-#     clear_screen,
-#     display_main_divider,
-# )
+from rich import print
 
-# clear_screen()
+from dt_utility import (
+    clear_screen,
+    display_main_divider,
+)
 
-# display_main_divider()
-# # همان‌طور که قبلا گفتم، دستور ذیل، همیشه کار نمی‌کند
-# # print(f"Version of 'ollama' package: {ollama.__version__}")
-# display_main_divider()
-# print()
+clear_screen()
+display_main_divider()
+
+# همان‌طور که قبلا گفتم، دستور ذیل، همیشه کار نمی‌کند
+# print(f"Version of 'ollama' package: {ollama.__version__}")
+
+display_main_divider()
+print()
 # **************************************************
 
 
@@ -51,9 +51,9 @@
 
 
 # **************************************************
-# Step (2) - 'generate()' method
+# Learning 'generate()' method
 # **************************************************
-# Error: ConnectionError: Failed to connect to Ollama.
+# ConnectionError: Failed to connect to Ollama.
 # Please check that Ollama is downloaded, running and
 # accessible. https://ollama.com/download
 #
@@ -63,6 +63,7 @@
 # import ollama
 
 # from rich import print
+
 # from dt_utility import (
 #     clear_screen,
 #     display_divider,
@@ -70,42 +71,46 @@
 # )
 
 # clear_screen()
+# display_main_divider()
 
 # generate_completion = ollama.generate(
 #     model="gemma3:1b",
 #     prompt="Tell me a joke.",
 # )
 
-# display_main_divider()
 # print(generate_completion)
 # display_divider()
 # print(generate_completion.response)
+
 # display_main_divider()
 # print()
 # **************************************************
 
 
 # **************************************************
-# Step (3) - 'chat()' method
+# Learning 'chat()' method
 # **************************************************
 # import ollama
 
 # from rich import print
+
 # from dt_utility import (
 #     clear_screen,
 #     display_main_divider,
 # )
 
 # clear_screen()
+# display_main_divider()
 
 # # NEW: 'generate()' -> 'chat()'
 # response = ollama.chat(
 #     model="gemma3:1b",
+#     # NEW
 #     messages=[{"role": "user", "content": "Tell me a joke."}],
 # )
 
-# display_main_divider()
 # print(response)
+
 # display_main_divider()
 # print()
 # **************************************************
@@ -142,32 +147,38 @@
 
 
 # **************************************************
-# Step (4)
-# **************************************************
 # import ollama
 
+# from typing import (
+#     Dict,
+#     List,
+#     Final,
+# )
+
 # from rich import print
-# from typing import Final
+
 # from dt_utility import (
 #     clear_screen,
 #     display_divider,
 #     display_main_divider,
 # )
 
-# # NEW: لوس بازی
+# # NEW: Type Hint: لوس بازی
 # from ollama import ChatResponse
 
 # # NEW
 # MODEL_NAME: Final[str] = "gemma3:1b".replace(" ", "").lower()
 
 # clear_screen()
+# display_main_divider()
 
 # # NEW
-# messages: list[dict] = []
+# messages: List[Dict] = []
+# # messages: list[dict] = []
 
 # # NEW
 # user_prompt: str = "Tell me a joke."
-# user_message: dict = {"role": "user", "content": user_prompt}
+# user_message: Dict = {"role": "user", "content": user_prompt}
 # messages.append(user_message)
 
 # # NEW: ChatResponse
@@ -176,25 +187,33 @@
 #     messages=messages,
 # )
 
-# display_main_divider()
+# # NEW
 # print(response["message"]["content"])
+
 # display_divider()
 # # NEW:‌ ‌Best Practice
 # print(response.message.content)
+
 # display_main_divider()
 # print()
 # **************************************************
 
 
 # **************************************************
-# Step (5) - Client
+# Learning Client
 # **************************************************
-# from rich import print
-# from typing import Final
+# from typing import (
+#     Dict,
+#     List,
+#     Final,
+# )
+
 # from dt_utility import (
 #     clear_screen,
 #     display_main_divider,
 # )
+
+# from rich import print
 # from ollama import ChatResponse
 
 # # NEW
@@ -208,13 +227,14 @@
 # # BASE_URL: Final[str] = "http://localhost:11434".replace(" ", "").lower()
 
 # clear_screen()
+# display_main_divider()
 
-# messages: list[dict] = []
+# messages: List[Dict] = []
 
 # # NEW: Change 'user_prompt' value
 # user_prompt: str = "Tell me a short science fiction story."
 
-# user_message: dict = {"role": "user", "content": user_prompt}
+# user_message: Dict = {"role": "user", "content": user_prompt}
 # messages.append(user_message)
 
 # # NEW
@@ -228,29 +248,37 @@
 #     messages=messages,
 # )
 
-# display_main_divider()
 # print(response.message.content)
+
 # display_main_divider()
 # print()
 # **************************************************
 
 
 # **************************************************
-# Step (6) - 'rich': Markdown
+# Learning 'rich': Markdown
 # **************************************************
+# from typing import (
+#     Dict,
+#     List,
+#     Final,
+# )
+
 # from ollama import (
 #     Client,
 #     ChatResponse,
 # )
+
 # from rich import print
-# from typing import Final
+
 # from dt_utility import (
 #     clear_screen,
+#     display_divider,
 #     display_main_divider,
 # )
-# from typing import Optional
 
 # # NEW
+# from typing import Optional
 # from rich.console import Console
 # from rich.markdown import Markdown
 
@@ -258,13 +286,14 @@
 # BASE_URL: Final[str] = "http://127.0.0.1:11434".replace(" ", "").lower()
 
 # clear_screen()
+# display_main_divider()
 
-# messages: list[dict] = []
+# messages: List[Dict] = []
 
 # # NEW: Change 'user_prompt' value
 # user_prompt: str = "Write a python code to print numbers between one to ten."
 
-# user_message: dict = {"role": "user", "content": user_prompt}
+# user_message: Dict = {"role": "user", "content": user_prompt}
 # messages.append(user_message)
 
 # client = Client(host=BASE_URL)
@@ -275,27 +304,34 @@
 #     messages=messages,
 # )
 
+# # NEW
+# # assistant_answer: str | None = response.message.content
 # assistant_answer: Optional[str] = response.message.content
 
-# # NEW
+# # NEW: assistant_answer is None or "" (Null String)
 # if not assistant_answer:
 #     assistant_answer = "[red][bold][-][/bold] No content received![/red]"
 
-# display_main_divider()
 # # NEW
 # print(assistant_answer)
-# # console = Console()
-# # markdown = Markdown(markup=assistant_answer)
-# # console.print(markdown)
+
+# # NEW
+# console = Console()
+# markdown = Markdown(markup=assistant_answer)
+# display_divider()
+# console.print(markdown)
+
 # display_main_divider()
 # print()
 # **************************************************
 
 
 # **************************************************
-# Step (7) - Temperature
+# Learning Temperature
 # **************************************************
 # from typing import (
+#     Dict,
+#     List,
 #     Final,
 #     Optional,
 # )
@@ -321,13 +357,14 @@
 # BASE_URL: Final[str] = "http://127.0.0.1:11434".replace(" ", "").lower()
 
 # clear_screen()
+# display_main_divider()
 
-# messages: list[dict] = []
+# messages: List[Dict] = []
 
 # # NEW: Change 'user_prompt' value
 # user_prompt: str = "Tell me a long science fiction story."
 
-# user_message: dict = {"role": "user", "content": user_prompt}
+# user_message: Dict = {"role": "user", "content": user_prompt}
 # messages.append(user_message)
 
 # client = Client(host=BASE_URL)
@@ -345,45 +382,50 @@
 # if not assistant_answer:
 #     assistant_answer = "[red][bold][-][/bold] No content received![/red]"
 
-# display_main_divider()
 # console = Console()
 # markdown = Markdown(markup=assistant_answer)
 # console.print(markdown)
+
 # display_main_divider()
 # print()
 # **************************************************
 
 
 # **************************************************
-# Step (8) - Stream
+# Learning Stream
 # **************************************************
 # from typing import (
+#     Dict,
+#     List,
 #     Final,
 #     Optional,
 #     # NEW
 #     Iterator,
 # )
 
-# from rich import print
+# from ollama import (
+#     Client,
+#     ChatResponse,
+# )
 
-# from ollama import Client
-# from ollama import ChatResponse
+# from rich import print
 
 # from dt_utility import (
 #     clear_screen,
 #     display_main_divider,
 # )
 
-# TEMPERATURE: Final[float] = 0.7
+# TEMPERATURE: Final[float] = 0.8
 # MODEL_NAME: Final[str] = "gemma3:1b".replace(" ", "").lower()
 # BASE_URL: Final[str] = "http://127.0.0.1:11434".replace(" ", "").lower()
 
 # clear_screen()
+# display_main_divider()
 
-# messages: list[dict] = []
+# messages: List[Dict] = []
 
 # user_prompt: str = "Tell me a long science fiction story."
-# user_message: dict = {"role": "user", "content": user_prompt}
+# user_message: Dict = {"role": "user", "content": user_prompt}
 # messages.append(user_message)
 
 # client = Client(host=BASE_URL)
@@ -398,31 +440,38 @@
 #     options={"temperature": TEMPERATURE},
 # )
 
-# display_main_divider()
 # # NEW
 # for chunk in response_stream:
 #     content: Optional[str] = chunk.message.content
 #     if content:
+#         # print(content)
 #         print(content, end="", flush=True)
+
+# # NEW
+# print()
+
 # display_main_divider()
 # print()
 # **************************************************
 
 
 # **************************************************
-# Step (9) - Elapsed Time
+# Learning Elapsed Time
 # **************************************************
+# # NEW
+# import time
+
 # from typing import (
+#     Dict,
+#     List,
 #     Final,
 #     Optional,
 # )
 
-# from ollama import Client
-# from ollama import ChatResponse
-
-# from rich import print
-# from rich.console import Console
-# from rich.markdown import Markdown
+# from ollama import (
+#     Client,
+#     ChatResponse,
+# )
 
 # from dt_utility import (
 #     clear_screen,
@@ -430,21 +479,23 @@
 #     display_main_divider,
 # )
 
-# # NEW
-# import time
+# from rich import print
+# from rich.console import Console
+# from rich.markdown import Markdown
 
-# TEMPERATURE: Final[float] = 0.7
+# TEMPERATURE: Final[float] = 0.8
 # MODEL_NAME: Final[str] = "gemma3:1b".replace(" ", "").lower()
 # BASE_URL: Final[str] = "http://127.0.0.1:11434".replace(" ", "").lower()
 
 # clear_screen()
+# display_main_divider()
 
-# messages: list[dict] = []
+# messages: List[Dict] = []
 
 # # NEW: Change 'user_prompt' value
 # user_prompt: str = "Tell me a joke."
 
-# user_message: dict = {"role": "user", "content": user_prompt}
+# user_message: Dict = {"role": "user", "content": user_prompt}
 # messages.append(user_message)
 
 # client = Client(host=BASE_URL)
@@ -468,7 +519,6 @@
 # if not assistant_answer:
 #     assistant_answer = "[red][bold][-][/bold] No content received![/red]"
 
-# display_main_divider()
 # console = Console()
 # markdown = Markdown(markup=assistant_answer)
 # console.print(markdown)
@@ -483,13 +533,20 @@
 
 
 # **************************************************
-# Step (10) - Elapsed Time with 'perf_counter()'
+# Learning Elapsed Time with 'perf_counter()'
 # **************************************************
 # import time
 
 # from typing import (
+#     Dict,
+#     List,
 #     Final,
 #     Optional,
+# )
+
+# from ollama import (
+#     Client,
+#     ChatResponse,
 # )
 
 # from dt_utility import (
@@ -500,23 +557,21 @@
 #     format_seconds,
 # )
 
-# from ollama import Client
-# from ollama import ChatResponse
-
 # from rich import print
 # from rich.console import Console
 # from rich.markdown import Markdown
 
-# TEMPERATURE: Final[float] = 0.7
+# TEMPERATURE: Final[float] = 0.8
 # MODEL_NAME: Final[str] = "gemma3:1b".replace(" ", "").lower()
 # BASE_URL: Final[str] = "http://127.0.0.1:11434".replace(" ", "").lower()
 
 # clear_screen()
+# display_main_divider()
 
-# messages: list[dict] = []
+# messages: List[Dict] = []
 
 # user_prompt: str = "Tell me a joke."
-# user_message: dict = {"role": "user", "content": user_prompt}
+# user_message: Dict = {"role": "user", "content": user_prompt}
 # messages.append(user_message)
 
 # client = Client(host=BASE_URL)
@@ -543,32 +598,35 @@
 # if not assistant_answer:
 #     assistant_answer = "[red][bold][-][/bold] No content received![/red]"
 
-# display_main_divider()
 # console = Console()
 # markdown = Markdown(markup=assistant_answer)
 # console.print(markdown)
+
 # display_divider()
 # # NEW
 # # print(f"Elapsed Time: {elapsed_time:.2f} second(s).")
 # print(f"Elapsed Time: {formatted_elapsed_time}")
+
 # display_main_divider()
 # print()
 # **************************************************
 
 
 # **************************************************
-# Step (11) - Reasoning - Thinking
+# Learning Reasoning / Thinking
 # **************************************************
 # import time
+
+# from typing import (
+#     Dict,
+#     List,
+#     Final,
+#     Optional,
+# )
 
 # from ollama import (
 #     Client,
 #     ChatResponse,
-# )
-
-# from typing import (
-#     Final,
-#     Optional,
 # )
 
 # from dt_utility import (
@@ -582,21 +640,21 @@
 # from rich.console import Console
 # from rich.markdown import Markdown
 
-# TEMPERATURE: Final[float] = 0.7
+# TEMPERATURE: Final[float] = 0.8
 # BASE_URL: Final[str] = "http://127.0.0.1:11434".replace(" ", "").lower()
 
 # # NEW
 # MODEL_NAME: Final[str] = "deepseek-r1:1.5b".replace(" ", "").lower()
 
 # clear_screen()
+# display_main_divider()
 
-# messages: list[dict] = []
+# messages: List[Dict] = []
 
-# user_prompt: str = (
-#     "If it takes one hour for a pair of pants to dry on the rooftop, how long will it take for ten pairs of pants to dry on the rooftop?"
-# )
+# # NEW: Change 'user_prompt' value
+# user_prompt: str = "If it takes one hour for a pair of pants to dry on the rooftop, how long will it take for ten pairs of pants to dry on the rooftop?"
 
-# user_message: dict = {"role": "user", "content": user_prompt}
+# user_message: Dict = {"role": "user", "content": user_prompt}
 # messages.append(user_message)
 
 # client = Client(host=BASE_URL)
@@ -606,6 +664,7 @@
 # response: ChatResponse = client.chat(
 #     # NEW
 #     # think=True,
+#     # think=None,  # Default: False
 #     think=False,  # Default: False
 #     #
 #     stream=False,
@@ -630,8 +689,8 @@
 # if not assistant_thinking:
 #     assistant_answer = "[red][bold][-][/bold] No thinking received![/red]"
 
-# display_main_divider()
 # print(response)
+
 # display_divider()
 # if assistant_thinking:
 #     # NEW
@@ -639,11 +698,14 @@
 #     markdown = Markdown(markup=assistant_thinking)
 #     console.print(markdown)
 #     display_divider()
+
 # console = Console()
 # markdown = Markdown(markup=assistant_answer)
 # console.print(markdown)
+
 # display_divider()
 # print(f"Elapsed Time: {formatted_elapsed_time}")
+
 # display_main_divider()
 # print()
 # **************************************************
@@ -677,22 +739,22 @@
 
 
 # **************************************************
-# Step (12)
-# **************************************************
-# - Without History
-# - Simple Text Chat Bot
+# - Simple Text Chatbot
+# - Without History (Memory)
 # - System Prompt AND System Message
 # **************************************************
 # import time
 
+# from typing import (
+#     Dict,
+#     List,
+#     Final,
+#     Optional,
+# )
+
 # from ollama import (
 #     Client,
 #     ChatResponse,
-# )
-
-# from typing import (
-#     Final,
-#     Optional,
 # )
 
 # from dt_utility import (
@@ -700,13 +762,18 @@
 #     format_seconds,
 #     display_divider,
 #     display_main_divider,
+#     display_tiny_divider,
+#     display_title_message,
+#     display_warning_message,
 # )
 
 # from rich import print
 # from rich.console import Console
 # from rich.markdown import Markdown
 
-# TEMPERATURE: Final[float] = 0.7
+# VERSION: Final[str] = "0.1.0"
+
+# TEMPERATURE: Final[float] = 0.8
 # BASE_URL: Final[str] = "http://127.0.0.1:11434".replace(" ", "").lower()
 
 # # NEW
@@ -715,22 +782,31 @@
 
 # # NEW
 # SYSTEM_PROMPT: Final[str] = "You are a helpful AI assistant."
-# SYSTEM_MESSAGE: Final[dict] = {"role": "system", "content": SYSTEM_PROMPT}
+# SYSTEM_MESSAGE: Final[Dict] = {"role": "system", "content": SYSTEM_PROMPT}
 
 # clear_screen()
+# display_main_divider()
+
+# title: str = f"Dariush Tasdighi - Simple Chatbot ({VERSION})"
+# display_title_message(message=title)
 
 # # NEW
 # while True:
-#     display_main_divider()
+#     display_divider()
 #     user_prompt: str = input("User: ").strip()
 
+#     if not user_prompt:
+#         continue
+
 #     if user_prompt.lower() in ["bye", "exit", "quit"]:
-#         print("[yellow]Goodbye![/yellow]")
+#         message: str = "Goodbye!"
+#         display_divider()
+#         display_warning_message(message=message)
 #         display_main_divider()
 #         print()
 #         break
 
-#     messages: list[dict] = []  # Reset
+#     messages: List[Dict] = []  # Reset
 #     messages.append(SYSTEM_MESSAGE)
 
 #     user_message: dict = {"role": "user", "content": user_prompt}
@@ -754,36 +830,38 @@
 
 #     assistant_answer: Optional[str] = response.message.content
 
-#     if assistant_answer:
+#     if not assistant_answer:
 #         assistant_answer = "[red][bold][-][/bold] No content received![/red]"
 
-#     display_main_divider()
+#     display_tiny_divider()
 #     console = Console()
 #     markdown = Markdown(markup=assistant_answer)
 #     console.print(markdown)
-#     display_divider()
+
+#     display_tiny_divider()
 #     print(f"Elapsed Time: {formatted_elapsed_time}")
-#     display_main_divider()
+
+#     display_divider()
 #     print()
 # **************************************************
 
 
 # **************************************************
-# Step (13)
-# **************************************************
-# - With History
+# - With History (Memory)
 # - Simple Text Chat Bot
 # **************************************************
 # import time
 
+# from typing import (
+#     Dict,
+#     List,
+#     Final,
+#     Optional,
+# )
+
 # from ollama import (
 #     Client,
 #     ChatResponse,
-# )
-
-# from typing import (
-#     Final,
-#     Optional,
 # )
 
 # from dt_utility import (
@@ -791,243 +869,8 @@
 #     format_seconds,
 #     display_divider,
 #     display_main_divider,
-# )
-
-# from rich import print
-# from rich.console import Console
-# from rich.markdown import Markdown
-
-# TEMPERATURE: Final[float] = 0.7
-# BASE_URL: Final[str] = "http://127.0.0.1:11434".replace(" ", "").lower()
-
-# # MODEL_NAME: Final[str] = "gemma3:1b".replace(" ", "").lower()
-# MODEL_NAME: Final[str] = "llama3.2:1b".replace(" ", "").lower()
-
-# SYSTEM_PROMPT: Final[str] = "You are a helpful AI assistant."
-# SYSTEM_MESSAGE: Final[dict] = {"role": "system", "content": SYSTEM_PROMPT}
-
-# clear_screen()
-
-# # NEW
-# messages: list[dict] = []
-# messages.append(SYSTEM_MESSAGE)
-
-# while True:
-#     display_main_divider()
-#     user_prompt: str = input("User: ").strip()
-
-#     if user_prompt.lower() in ["bye", "exit", "quit"]:
-#         print("[yellow]Goodbye![/yellow]")
-#         display_main_divider()
-#         print()
-#         break
-
-#     # NEW
-#     # messages: list[dict] = []
-#     # messages.append(SYSTEM_MESSAGE)
-
-#     user_message: dict = {"role": "user", "content": user_prompt}
-#     messages.append(user_message)
-
-#     client = Client(host=BASE_URL)
-
-#     start_time: float = time.perf_counter()
-
-#     response: ChatResponse = client.chat(
-#         think=False,
-#         stream=False,
-#         model=MODEL_NAME,
-#         messages=messages,
-#         options={"temperature": TEMPERATURE},
-#     )
-
-#     end_time: float = time.perf_counter()
-#     elapsed_time: float = end_time - start_time
-#     formatted_elapsed_time: str = format_seconds(seconds=elapsed_time)
-
-#     # در این مثال، فرض بر این است که حتما جواب داریم
-#     assistant_answer: Optional[str] = response.message.content
-
-#     if assistant_answer:
-#         assistant_answer = "No content received!"
-
-#     # NEW
-#     assistant_message: dict = {"role": "assistant", "content": assistant_answer}
-#     messages.append(assistant_message)
-
-#     if assistant_answer == "No content received!":
-#         assistant_answer = f"[red][bold][-][/bold] {assistant_answer}[/red]"
-
-#     display_divider()
-#     console = Console()
-#     markdown = Markdown(markup=assistant_answer)
-#     console.print(markdown)
-#     display_divider()
-#     print(f"Elapsed Time: {formatted_elapsed_time}")
-#     display_main_divider()
-#     print()
-# **************************************************
-
-
-# **************************************************
-# Step (14) - Best Practice (1)
-# **************************************************
-# import time
-
-# from ollama import (
-#     Client,
-#     ChatResponse,
-# )
-
-# from typing import (
-#     Final,
-#     Optional,
-# )
-
-# from dt_utility import (
-#     clear_screen,
-#     format_seconds,
-#     display_divider,
-#     display_main_divider,
-# )
-
-# from rich import print
-# from rich.console import Console
-# from rich.markdown import Markdown
-
-# # NEW
-# USER_QUESTION: Final[str] = "User: "
-# EXIT_COMMANDS: Final[list[str]] = [
-#     "bye".replace(" ", "").lower(),
-#     "exit".replace(" ", "").lower(),
-#     "quit".replace(" ", "").lower(),
-# ]
-
-# # NEW
-# ROLE_USER: Final[str] = "user".replace(" ", "").lower()
-# ROLE_SYSTEM: Final[str] = "system".replace(" ", "").lower()
-# ROLE_ASSISTANT: Final[str] = "assistant".replace(" ", "").lower()
-
-# # NEW
-# KEY_NAME_ROLE: Final[str] = "role".replace(" ", "").lower()
-# KEY_NAME_CONTENT: Final[str] = "content".replace(" ", "").lower()
-# KEY_NAME_TEMPRETURE: Final[str] = "temperature".replace(" ", "").lower()
-
-# TEMPERATURE: Final[float] = 0.7
-# BASE_URL: Final[str] = "http://127.0.0.1:11434".replace(" ", "").lower()
-
-# # MODEL_NAME: Final[str] = "gemma3:1b".replace(" ", "").lower()
-# MODEL_NAME: Final[str] = "llama3.2:1b".replace(" ", "").lower()
-
-# SYSTEM_PROMPT: Final[str] = "You are a helpful AI assistant."
-
-# # NEW
-# SYSTEM_MESSAGE: Final[dict] = {
-#     KEY_NAME_ROLE: ROLE_SYSTEM,
-#     KEY_NAME_CONTENT: SYSTEM_PROMPT,
-# }
-# # SYSTEM_MESSAGE: Final[dict] = {"role": "system", "content": SYSTEM_PROMPT}
-
-# clear_screen()
-
-# messages: list[dict] = []
-# messages.append(SYSTEM_MESSAGE)
-
-# while True:
-#     display_main_divider()
-
-#     # NEW
-#     # user_prompt: str = input("User: ").strip()
-#     user_prompt: str = input(USER_QUESTION).strip()
-
-#     # NEW
-#     # if user_prompt.lower() in ["bye", "exit", "quit"]:
-#     if user_prompt.lower() in EXIT_COMMANDS:
-#         print("[yellow]Goodbye![/yellow]")
-#         display_main_divider()
-#         print()
-#         break
-
-#     # NEW
-#     # user_message: dict = {"role": "user", "content": user_prompt}
-#     user_message: dict = {
-#         KEY_NAME_ROLE: ROLE_USER,
-#         KEY_NAME_CONTENT: user_prompt,
-#     }
-
-#     messages.append(user_message)
-
-#     client = Client(host=BASE_URL)
-
-#     start_time: float = time.perf_counter()
-
-#     response: ChatResponse = client.chat(
-#         think=False,
-#         stream=False,
-#         model=MODEL_NAME,
-#         messages=messages,
-#         # NEW
-#         # options={"temperature": TEMPERATURE},
-#         options={KEY_NAME_TEMPRETURE: TEMPERATURE},
-#     )
-
-#     end_time: float = time.perf_counter()
-#     elapsed_time: float = end_time - start_time
-#     formatted_elapsed_time: str = format_seconds(seconds=elapsed_time)
-
-#     # در این مثال، فرض بر این است که حتما جواب داریم
-#     assistant_answer: Optional[str] = response.message.content
-
-#     if assistant_answer:
-#         assistant_answer = "No content received!"
-
-#     # NEW
-#     # assistant_message: dict = {"role": "assistant", "content": assistant_answer}
-#     assistant_message: dict = {
-#         KEY_NAME_ROLE: ROLE_ASSISTANT,
-#         KEY_NAME_CONTENT: assistant_answer,
-#     }
-
-#     messages.append(assistant_message)
-
-#     if assistant_answer == "No content received!":
-#         assistant_answer = f"[red][bold][-][/bold] {assistant_answer}[/red]"
-
-#     messages.append(assistant_message)
-
-#     display_divider()
-#     console = Console()
-#     markdown = Markdown(markup=assistant_answer)
-#     console.print(markdown)
-#     display_divider()
-#     print(f"Elapsed Time: {formatted_elapsed_time}")
-#     display_main_divider()
-#     print()
-# **************************************************
-
-
-# **************************************************
-# Step (15) - Best Practice (2)
-# **************************************************
-# import time
-
-# from ollama import (
-#     Client,
-#     ChatResponse,
-# )
-
-# from typing import (
-#     Final,
-#     Optional,
-# )
-
-# from dt_utility import (
-#     clear_screen,
-#     format_seconds,
-#     display_divider,
-#     display_main_divider,
-#     # NEW
-#     display_error_message,
+#     display_tiny_divider,
+#     display_title_message,
 #     display_warning_message,
 # )
 
@@ -1035,139 +878,81 @@
 # from rich.console import Console
 # from rich.markdown import Markdown
 
-# USER_QUESTION: Final[str] = "User: "
+# VERSION: Final[str] = "0.1.0"
 
-# EXIT_COMMANDS: Final[list[str]] = [
-#     "bye".replace(" ", "").lower(),
-#     "exit".replace(" ", "").lower(),
-#     "quit".replace(" ", "").lower(),
-# ]
-
-# ROLE_USER: Final[str] = "user".replace(" ", "").lower()
-# ROLE_SYSTEM: Final[str] = "system".replace(" ", "").lower()
-# ROLE_ASSISTANT: Final[str] = "assistant".replace(" ", "").lower()
-
-# KEY_NAME_ROLE: Final[str] = "role".replace(" ", "").lower()
-# KEY_NAME_CONTENT: Final[str] = "content".replace(" ", "").lower()
-# KEY_NAME_TEMPRETURE: Final[str] = "temperature".replace(" ", "").lower()
-
-# # NEW
-# MESSAGE_GOODBYE: str = "Goodbye"
-# MESSAGE_NO_CONTENT_RECEIVED: str = "No content received!"
-
-# TEMPERATURE: Final[float] = 0.7
+# TEMPERATURE: Final[float] = 0.8
+# MODEL_NAME: Final[str] = "llama3.2:1b".replace(" ", "").lower()
 # BASE_URL: Final[str] = "http://127.0.0.1:11434".replace(" ", "").lower()
 
-# # MODEL_NAME: Final[str] = "gemma3:1b".replace(" ", "").lower()
-# MODEL_NAME: Final[str] = "llama3.2:1b".replace(" ", "").lower()
-
 # SYSTEM_PROMPT: Final[str] = "You are a helpful AI assistant."
+# SYSTEM_MESSAGE: Final[Dict] = {"role": "system", "content": SYSTEM_PROMPT}
 
-# SYSTEM_MESSAGE: Final[dict] = {
-#     KEY_NAME_ROLE: ROLE_SYSTEM,
-#     KEY_NAME_CONTENT: SYSTEM_PROMPT,
-# }
+# clear_screen()
+# display_main_divider()
 
+# title: str = f"Dariush Tasdighi - Simple Chatbot ({VERSION})"
+# display_title_message(message=title)
 
 # # NEW
-# def chat(
-#     messages: list[dict],
-#     think: bool = False,
-#     base_url: str = BASE_URL,
-#     model_name: str = MODEL_NAME,
-#     temperature: float = TEMPERATURE,
-# ) -> Optional[str]:
-#     """Chat with Ollama service."""
+# messages: List[Dict] = []
+# messages.append(SYSTEM_MESSAGE)
 
-#     client = Client(host=base_url)
+# while True:
+#     display_divider()
+#     user_prompt: str = input("User: ").strip()
+
+#     if not user_prompt:
+#         continue
+
+#     if user_prompt.lower() in ["bye", "exit", "quit"]:
+#         message: str = "Goodbye!"
+#         display_divider()
+#         display_warning_message(message=message)
+#         display_main_divider()
+#         print()
+#         break
+
+#     user_message: dict = {"role": "user", "content": user_prompt}
+#     messages.append(user_message)
+
+#     client = Client(host=BASE_URL)
+
+#     start_time: float = time.perf_counter()
 
 #     response: ChatResponse = client.chat(
-#         think=think,
+#         think=False,
 #         stream=False,
-#         model=model_name,
+#         model=MODEL_NAME,
 #         messages=messages,
-#         options={KEY_NAME_TEMPRETURE: temperature},
+#         options={"temperature": TEMPERATURE},
 #     )
+
+#     end_time: float = time.perf_counter()
+#     elapsed_time: float = end_time - start_time
+#     formatted_elapsed_time: str = format_seconds(seconds=elapsed_time)
 
 #     assistant_answer: Optional[str] = response.message.content
 
-#     return assistant_answer
-
-
-# # NEW
-# def main() -> None:
-#     """Main function"""
-
-#     clear_screen()
-
-#     messages: list[dict] = []
-#     messages.append(SYSTEM_MESSAGE)
-
-#     while True:
-#         display_main_divider()
-#         user_prompt: str = input(USER_QUESTION).strip()
-
-#         if user_prompt.lower() in EXIT_COMMANDS:
-#             # NEW
-#             display_warning_message(message=MESSAGE_GOODBYE)
-#             display_main_divider()
-#             break
-
-#         user_message: dict = {
-#             KEY_NAME_ROLE: ROLE_USER,
-#             KEY_NAME_CONTENT: user_prompt,
-#         }
-
-#         messages.append(user_message)
-
-#         start_time: float = time.perf_counter()
-
-#         assistant_answer: Optional[str] = chat(
-#             messages=messages,
-#         )
-
-#         end_time: float = time.perf_counter()
-#         elapsed_time: float = end_time - start_time
-#         formatted_elapsed_time: str = format_seconds(seconds=elapsed_time)
-
+#     if not assistant_answer:
 #         # NEW
-#         if assistant_answer:
-#             messages.pop()
-#             assistant_answer = MESSAGE_NO_CONTENT_RECEIVED
-#         else:
-#             assistant_message: dict = {
-#                 KEY_NAME_ROLE: ROLE_ASSISTANT,
-#                 KEY_NAME_CONTENT: assistant_answer,
-#             }
+#         messages.pop()
 
-#             messages.append(assistant_message)
+#         assistant_answer = "[red][bold][-][/bold] No content received![/red]"
+#     else:
+#         # NEW
+#         assistant_message: Dict = {"role": "assistant", "content": assistant_answer}
+#         messages.append(assistant_message)
 
-#         display_divider()
-#         console = Console()
-#         markdown = Markdown(markup=assistant_answer)
-#         console.print(markdown)
-#         display_divider()
-#         print(f"Elapsed Time: {formatted_elapsed_time}")
-#         display_main_divider()
-#         print()
+#     display_tiny_divider()
+#     console = Console()
+#     markdown = Markdown(markup=assistant_answer)
+#     console.print(markdown)
 
+#     display_tiny_divider()
+#     print(f"Elapsed Time: {formatted_elapsed_time}")
 
-# # NEW
-# if __name__ == "__main__":
-#     try:
-#         main()
-
-#     except KeyboardInterrupt:
-#         print()
-#         display_main_divider()
-
-#     except Exception as exception:
-#         display_divider()
-#         display_error_message(message=str(exception))
-#         display_main_divider()
-
-#     finally:
-#         print()
+#     display_divider()
+#     print()
 # **************************************************
 
 
@@ -1197,18 +982,18 @@
 
 
 # **************************************************
-# Step (16) - Best Practice (3) - Calculate Input / Output Tokens
-# **************************************************
 # import time
+
+# from typing import (
+#     Dict,
+#     List,
+#     Final,
+#     Optional,
+# )
 
 # from ollama import (
 #     Client,
 #     ChatResponse,
-# )
-
-# from typing import (
-#     Final,
-#     Optional,
 # )
 
 # from dt_utility import (
@@ -1216,18 +1001,164 @@
 #     format_seconds,
 #     display_divider,
 #     display_main_divider,
-#     display_error_message,
+#     display_tiny_divider,
+#     display_title_message,
 #     display_warning_message,
-#     display_information_message,
 # )
 
 # from rich import print
 # from rich.console import Console
 # from rich.markdown import Markdown
 
-# USER_QUESTION: Final[str] = "User: "
+# VERSION: Final[str] = "0.1.0"
+# TITLE: Final[str] = f"Dariush Tasdighi - Simple Chatbot ({VERSION})"
 
-# EXIT_COMMANDS: Final[list[str]] = [
+# TEMPERATURE: Final[float] = 0.8
+# MODEL_NAME: Final[str] = "llama3.2:1b".replace(" ", "").lower()
+# BASE_URL: Final[str] = "http://127.0.0.1:11434".replace(" ", "").lower()
+
+# MESSAGE_GOODBYE: Final[str] = "Goodbye"
+# MESSAGE_NO_CONTENT_RECEIVED: Final[str] = "No content received!"
+
+# # NEW
+# USER_PROMPT: Final[str] = "User: "
+# EXIT_COMMANDS: Final[List[str]] = [
+#     "bye".replace(" ", "").lower(),
+#     "exit".replace(" ", "").lower(),
+#     "quit".replace(" ", "").lower(),
+# ]
+
+# # NEW
+# ROLE_USER: Final[str] = "user".replace(" ", "").lower()
+# ROLE_SYSTEM: Final[str] = "system".replace(" ", "").lower()
+# ROLE_ASSISTANT: Final[str] = "assistant".replace(" ", "").lower()
+
+# # NEW
+# KEY_NAME_ROLE: Final[str] = "role".replace(" ", "").lower()
+# KEY_NAME_CONTENT: Final[str] = "content".replace(" ", "").lower()
+# KEY_NAME_TEMPRETURE: Final[str] = "temperature".replace(" ", "").lower()
+
+# SYSTEM_PROMPT: Final[str] = "You are a helpful AI assistant."
+
+# SYSTEM_MESSAGE: Final[dict] = {
+#     KEY_NAME_ROLE: ROLE_SYSTEM,
+#     KEY_NAME_CONTENT: SYSTEM_PROMPT,
+# }
+# # SYSTEM_MESSAGE: Final[dict] = {"role": "system", "content": SYSTEM_PROMPT}
+
+# clear_screen()
+# display_main_divider()
+
+# display_title_message(message=TITLE)
+
+# messages: List[Dict] = []
+# messages.append(SYSTEM_MESSAGE)
+
+# while True:
+#     display_divider()
+#     user_prompt: str = input(USER_PROMPT).strip()
+
+#     if not user_prompt:
+#         continue
+
+#     if user_prompt.lower() in EXIT_COMMANDS:
+#         display_divider()
+#         display_warning_message(message=MESSAGE_GOODBYE)
+#         display_main_divider()
+#         print()
+#         break
+
+#     user_message: Dict = {
+#         KEY_NAME_ROLE: ROLE_USER,
+#         KEY_NAME_CONTENT: user_prompt,
+#     }
+
+#     messages.append(user_message)
+
+#     client = Client(host=BASE_URL)
+
+#     start_time: float = time.perf_counter()
+
+#     response: ChatResponse = client.chat(
+#         think=False,
+#         stream=False,
+#         model=MODEL_NAME,
+#         messages=messages,
+#         options={KEY_NAME_TEMPRETURE: TEMPERATURE},
+#     )
+
+#     end_time: float = time.perf_counter()
+#     elapsed_time: float = end_time - start_time
+#     formatted_elapsed_time: str = format_seconds(seconds=elapsed_time)
+
+#     assistant_answer: Optional[str] = response.message.content
+
+#     if not assistant_answer:
+#         messages.pop()
+#         assistant_answer = f"[red][bold][-][/bold] {MESSAGE_NO_CONTENT_RECEIVED}![/red]"
+#     else:
+#         assistant_message: Dict = {
+#             KEY_NAME_ROLE: ROLE_ASSISTANT,
+#             KEY_NAME_CONTENT: assistant_answer,
+#         }
+
+#         messages.append(assistant_message)
+
+#     display_tiny_divider()
+#     console = Console()
+#     markdown = Markdown(markup=assistant_answer)
+#     console.print(markdown)
+
+#     display_tiny_divider()
+#     print(f"Elapsed Time: {formatted_elapsed_time}")
+
+#     display_divider()
+#     print()
+# **************************************************
+
+
+# **************************************************
+# import time
+
+# from typing import (
+#     Dict,
+#     List,
+#     Final,
+#     Tuple,
+#     Optional,
+# )
+
+# from ollama import (
+#     Client,
+#     ChatResponse,
+# )
+
+# from dt_utility import (
+#     clear_screen,
+#     format_seconds,
+#     display_divider,
+#     display_main_divider,
+#     display_tiny_divider,
+#     display_title_message,
+#     display_warning_message,
+# )
+
+# from rich import print
+# from rich.console import Console
+# from rich.markdown import Markdown
+
+# VERSION: Final[str] = "0.1.0"
+# TITLE: Final[str] = f"Dariush Tasdighi - Simple Chatbot ({VERSION})"
+
+# MODEL_TEMPERATURE: Final[float] = 0.8
+# MODEL_NAME: Final[str] = "llama3.2:1b".replace(" ", "").lower()
+# BASE_URL: Final[str] = "http://127.0.0.1:11434".replace(" ", "").lower()
+
+# MESSAGE_GOODBYE: Final[str] = "Goodbye"
+# MESSAGE_NO_CONTENT_RECEIVED: Final[str] = "No content received!"
+
+# USER_PROMPT: Final[str] = "User: "
+# EXIT_COMMANDS: Final[List[str]] = [
 #     "bye".replace(" ", "").lower(),
 #     "exit".replace(" ", "").lower(),
 #     "quit".replace(" ", "").lower(),
@@ -1241,14 +1172,177 @@
 # KEY_NAME_CONTENT: Final[str] = "content".replace(" ", "").lower()
 # KEY_NAME_TEMPRETURE: Final[str] = "temperature".replace(" ", "").lower()
 
+# SYSTEM_PROMPT: Final[str] = "You are a helpful AI assistant."
+
+# SYSTEM_MESSAGE: Final[dict] = {
+#     KEY_NAME_ROLE: ROLE_SYSTEM,
+#     KEY_NAME_CONTENT: SYSTEM_PROMPT,
+# }
+
+
+# def chat(
+#     messages: List[Dict],
+#     think: bool = False,
+#     base_url: str = BASE_URL,
+#     model_name: str = MODEL_NAME,
+#     temperature: float = MODEL_TEMPERATURE,
+# ) -> Tuple[Optional[str], float, int, int]:
+#     """Chat with Ollama service."""
+
+#     client = Client(host=base_url)
+
+#     start_time: float = time.perf_counter()
+
+#     response: ChatResponse = client.chat(
+#         think=think,
+#         stream=False,
+#         model=model_name,
+#         messages=messages,
+#         options={KEY_NAME_TEMPRETURE: temperature},
+#     )
+
+#     end_time: float = time.perf_counter()
+#     elapsed_time: float = end_time - start_time
+
+#     assistant_answer: Optional[str] = response.message.content
+
+#     prompt_tokens: int = 0  # Input Tokens
+#     completion_tokens: int = 0  # Output Tokens
+
+#     # برای حلال شدن سامانه
+#     if assistant_answer:
+#         if response.eval_count is not None:
+#             completion_tokens = response.eval_count
+#         if response.prompt_eval_count is not None:
+#             prompt_tokens = response.prompt_eval_count
+
+#     return assistant_answer, elapsed_time, prompt_tokens, completion_tokens
+
+
+# clear_screen()
+# display_main_divider()
+
+# display_title_message(message=TITLE)
+
+# messages: List[Dict] = []
+# messages.append(SYSTEM_MESSAGE)
+
+# while True:
+#     display_divider()
+#     user_prompt: str = input(USER_PROMPT).strip()
+
+#     if not user_prompt:
+#         continue
+
+#     if user_prompt.lower() in EXIT_COMMANDS:
+#         display_divider()
+#         display_warning_message(message=MESSAGE_GOODBYE)
+#         display_main_divider()
+#         print()
+#         break
+
+#     user_message: Dict = {
+#         KEY_NAME_ROLE: ROLE_USER,
+#         KEY_NAME_CONTENT: user_prompt,
+#     }
+
+#     messages.append(user_message)
+
+#     # assistant_answer, elapsed_time, _, _ = chat(
+#     #     messages=messages,
+#     # )
+
+#     assistant_answer, elapsed_time, prompt_tokens, completion_tokens = chat(
+#         messages=messages,
+#     )
+
+#     formatted_elapsed_time: str = format_seconds(seconds=elapsed_time)
+
+#     if not assistant_answer:
+#         messages.pop()
+#         assistant_answer = f"[red][bold][-][/bold] {MESSAGE_NO_CONTENT_RECEIVED}![/red]"
+#     else:
+#         assistant_message: Dict = {
+#             KEY_NAME_ROLE: ROLE_ASSISTANT,
+#             KEY_NAME_CONTENT: assistant_answer,
+#         }
+
+#         messages.append(assistant_message)
+
+#     display_tiny_divider()
+#     console = Console()
+#     markdown = Markdown(markup=assistant_answer)
+#     console.print(markdown)
+
+#     display_tiny_divider()
+#     print(f"Elapsed Time..............: {formatted_elapsed_time}")
+
+#     display_tiny_divider()
+#     print(f"Prompt (Input) Tokens.....: {prompt_tokens}")
+
+#     display_tiny_divider()
+#     print(f"Completion (Output) Tokens: {completion_tokens}")
+
+#     display_divider()
+#     print()
+# **************************************************
+
+
+# **************************************************
+# import time
+
+# from typing import (
+#     Dict,
+#     List,
+#     Final,
+#     Tuple,
+#     Optional,
+# )
+
+# from ollama import (
+#     Client,
+#     ChatResponse,
+# )
+
+# from dt_utility import (
+#     clear_screen,
+#     format_seconds,
+#     display_divider,
+#     display_main_divider,
+#     display_tiny_divider,
+#     display_error_message,
+#     display_title_message,
+#     display_warning_message,
+# )
+
+# from rich import print
+# from rich.console import Console
+# from rich.markdown import Markdown
+
+# VERSION: Final[str] = "0.1.0"
+# TITLE: Final[str] = f"Dariush Tasdighi - Simple Chatbot ({VERSION})"
+
+# MODEL_TEMPERATURE: Final[float] = 0.8
+# MODEL_NAME: Final[str] = "llama3.2:1b".replace(" ", "").lower()
+# BASE_URL: Final[str] = "http://127.0.0.1:11434".replace(" ", "").lower()
+
 # MESSAGE_GOODBYE: Final[str] = "Goodbye"
 # MESSAGE_NO_CONTENT_RECEIVED: Final[str] = "No content received!"
 
-# TEMPERATURE: Final[float] = 0.7
-# BASE_URL: Final[str] = "http://127.0.0.1:11434".replace(" ", "").lower()
+# USER_PROMPT: Final[str] = "User: "
+# EXIT_COMMANDS: Final[List[str]] = [
+#     "bye".replace(" ", "").lower(),
+#     "exit".replace(" ", "").lower(),
+#     "quit".replace(" ", "").lower(),
+# ]
 
-# # MODEL_NAME: Final[str] = "gemma3:1b".replace(" ", "").lower()
-# MODEL_NAME: Final[str] = "llama3.2:1b".replace(" ", "").lower()
+# ROLE_USER: Final[str] = "user".replace(" ", "").lower()
+# ROLE_SYSTEM: Final[str] = "system".replace(" ", "").lower()
+# ROLE_ASSISTANT: Final[str] = "assistant".replace(" ", "").lower()
+
+# KEY_NAME_ROLE: Final[str] = "role".replace(" ", "").lower()
+# KEY_NAME_CONTENT: Final[str] = "content".replace(" ", "").lower()
+# KEY_NAME_TEMPRETURE: Final[str] = "temperature".replace(" ", "").lower()
 
 # SYSTEM_PROMPT: Final[str] = "You are a helpful AI assistant."
 
@@ -1259,24 +1353,17 @@
 
 
 # def chat(
-#     messages: list[dict],
+#     messages: List[Dict],
 #     think: bool = False,
-#     # NEW
-#     notify: bool = False,
-#     #
 #     base_url: str = BASE_URL,
 #     model_name: str = MODEL_NAME,
-#     temperature: float = TEMPERATURE,
-#     # NEW
-#     # ) -> Optional[str]:
-# ) -> tuple[Optional[str], int, int]:
+#     temperature: float = MODEL_TEMPERATURE,
+# ) -> Tuple[Optional[str], float, int, int]:
 #     """Chat with Ollama service."""
 
 #     client = Client(host=base_url)
 
-#     # NEW
-#     if notify:
-#         display_information_message(message=f"Ollama '{model_name}' chat started...")
+#     start_time: float = time.perf_counter()
 
 #     response: ChatResponse = client.chat(
 #         think=think,
@@ -1286,96 +1373,86 @@
 #         options={KEY_NAME_TEMPRETURE: temperature},
 #     )
 
-#     # NEW
-#     if notify:
-#         display_information_message(message=f"Ollama '{model_name}' chat finished.")
+#     end_time: float = time.perf_counter()
+#     elapsed_time: float = end_time - start_time
 
 #     assistant_answer: Optional[str] = response.message.content
 
-#     # NEW
 #     prompt_tokens: int = 0  # Input Tokens
 #     completion_tokens: int = 0  # Output Tokens
 
-#     # NEW
-#     # شرط ذیل، برای حلال و حرام است
+#     # برای حلال شدن سامانه
 #     if assistant_answer:
 #         if response.eval_count is not None:
 #             completion_tokens = response.eval_count
 #         if response.prompt_eval_count is not None:
 #             prompt_tokens = response.prompt_eval_count
 
-#     # NEW
-#     return assistant_answer, prompt_tokens, completion_tokens
-#     # return (assistant_answer, prompt_tokens, completion_tokens)
+#     return assistant_answer, elapsed_time, prompt_tokens, completion_tokens
 
 
 # def main() -> None:
 #     """Main function"""
 
 #     clear_screen()
+#     display_main_divider()
 
-#     messages: list[dict] = []
+#     display_title_message(message=TITLE)
+
+#     messages: List[Dict] = []
 #     messages.append(SYSTEM_MESSAGE)
 
 #     while True:
-#         display_main_divider()
-#         user_prompt: str = input(USER_QUESTION).strip()
+#         display_divider()
+#         user_prompt: str = input(USER_PROMPT).strip()
+
+#         if not user_prompt:
+#             continue
 
 #         if user_prompt.lower() in EXIT_COMMANDS:
+#             display_divider()
 #             display_warning_message(message=MESSAGE_GOODBYE)
-#             display_main_divider()
-#             break
+#             return
 
-#         user_message: dict = {
+#         user_message: Dict = {
 #             KEY_NAME_ROLE: ROLE_USER,
 #             KEY_NAME_CONTENT: user_prompt,
 #         }
 
 #         messages.append(user_message)
 
-#         start_time: float = time.perf_counter()
-
-#         # NEW
-#         # assistant_answer, _, _ = chat(
-#         #     messages=messages,
-#         # )
-
-#         # NEW
-#         assistant_answer, prompt_tokens, completion_tokens = chat(
-#             # NEW
-#             notify=True,
-#             #
+#         assistant_answer, elapsed_time, prompt_tokens, completion_tokens = chat(
 #             messages=messages,
 #         )
 
-#         end_time: float = time.perf_counter()
-#         elapsed_time: float = end_time - start_time
 #         formatted_elapsed_time: str = format_seconds(seconds=elapsed_time)
 
 #         if not assistant_answer:
 #             messages.pop()
-#             assistant_answer = MESSAGE_NO_CONTENT_RECEIVED
+#             assistant_answer = f"[red][bold][-][/bold] {MESSAGE_NO_CONTENT_RECEIVED}![/red]"
 #         else:
-#             assistant_message: dict = {
+#             assistant_message: Dict = {
 #                 KEY_NAME_ROLE: ROLE_ASSISTANT,
 #                 KEY_NAME_CONTENT: assistant_answer,
 #             }
 
 #             messages.append(assistant_message)
 
-#         display_divider()
+#         display_tiny_divider()
 #         console = Console()
 #         markdown = Markdown(markup=assistant_answer)
 #         console.print(markdown)
+
+#         display_tiny_divider()
+#         print(f"Elapsed Time..............: {formatted_elapsed_time}")
+
+#         display_tiny_divider()
+#         print(f"Prompt (Input) Tokens.....: {prompt_tokens}")
+
+#         display_tiny_divider()
+#         print(f"Completion (Output) Tokens: {completion_tokens}")
+
 #         display_divider()
-#         print(f"Elapsed Time: {formatted_elapsed_time}")
-#         # NEW
-#         display_divider()
-#         print(f"Prompt Tokens (Input): {prompt_tokens}")
-#         display_divider()
-#         print(f"Completion Tokens (Output): {completion_tokens}")
-#         #
-#         display_main_divider()
 #         print()
 
 
@@ -1385,126 +1462,133 @@
 
 #     except KeyboardInterrupt:
 #         print()
-#         display_main_divider()
 
 #     except Exception as exception:
 #         display_divider()
 #         display_error_message(message=str(exception))
-#         display_main_divider()
 
 #     finally:
+#         display_main_divider()
 #         print()
 # **************************************************
 
 
 # **************************************************
-# Step (17) - Best Practice (4)
-# **************************************************
-import time
-import dt_ollama as ollama
-import dt_llm_utility as llm_utility
+# from typing import (
+#     Dict,
+#     List,
+#     Final,
+# )
 
-from dt_utility import (
-    clear_screen,
-    format_seconds,
-    display_divider,
-    display_main_divider,
-    display_error_message,
-    display_warning_message,
-)
+# from dt_utility import (
+#     clear_screen,
+#     format_seconds,
+#     display_divider,
+#     display_main_divider,
+#     display_tiny_divider,
+#     display_error_message,
+#     display_title_message,
+#     display_warning_message,
+# )
 
-from rich import print
-from rich.console import Console
-from rich.markdown import Markdown
+# from dt_lm import (
+#     ROLE_USER,
+#     USER_PROMPT,
+#     EXIT_COMMANDS,
+#     KEY_NAME_ROLE,
+#     ROLE_ASSISTANT,
+#     SYSTEM_MESSAGE,
+#     MESSAGE_GOODBYE,
+#     KEY_NAME_CONTENT,
+#     MESSAGE_NO_CONTENT_RECEIVED,
+# )
 
+# from rich import print
+# from dt_ollama import chat
+# from rich.console import Console
+# from rich.markdown import Markdown
 
-def main() -> None:
-    """Main function"""
-
-    clear_screen()
-
-    messages: list[dict] = []
-    messages.append(llm_utility.SYSTEM_MESSAGE)
-
-    while True:
-        display_main_divider()
-        user_prompt: str = input(llm_utility.USER_QUESTION).strip()
-
-        if user_prompt.lower() in llm_utility.EXIT_COMMANDS:
-            display_warning_message(message=llm_utility.MESSAGE_GOODBYE)
-            display_main_divider()
-            break
-
-        user_message: dict = {
-            llm_utility.KEY_NAME_ROLE: llm_utility.ROLE_USER,
-            llm_utility.KEY_NAME_CONTENT: user_prompt,
-        }
-
-        messages.append(user_message)
-
-        start_time: float = time.perf_counter()
-
-        assistant_answer, prompt_tokens, completion_tokens = ollama.chat(
-            notify=True,
-            messages=messages,
-        )
-
-        end_time: float = time.perf_counter()
-        elapsed_time: float = end_time - start_time
-        formatted_elapsed_time: str = format_seconds(seconds=elapsed_time)
-
-        # NEW
-        # if not assistant_answer:
-        #     messages.pop()
-        #     assistant_answer = llm_utility.MESSAGE_NO_CONTENT_RECEIVED
-        # else:
-        #     assistant_message: dict = {
-        #         llm_utility.KEY_NAME_ROLE: llm_utility.ROLE_ASSISTANT,
-        #         llm_utility.KEY_NAME_CONTENT: assistant_answer,
-        #     }
-
-        #     messages.append(assistant_message)
-
-        # NEW
-        # با تشکر از امیرحسین مرجانی
-        if assistant_answer:
-            assistant_message: dict = {
-                llm_utility.KEY_NAME_ROLE: llm_utility.ROLE_ASSISTANT,
-                llm_utility.KEY_NAME_CONTENT: assistant_answer,
-            }
-
-            messages.append(assistant_message)
-        else:
-            messages.pop()
-            assistant_answer = llm_utility.MESSAGE_NO_CONTENT_RECEIVED
-
-        display_divider()
-        console = Console()
-        markdown = Markdown(markup=assistant_answer)
-        console.print(markdown)
-        display_divider()
-        print(f"Elapsed Time: {formatted_elapsed_time}")
-        display_divider()
-        print(f"Prompt Tokens (Input): {prompt_tokens}")
-        display_divider()
-        print(f"Completion Tokens (Output): {completion_tokens}")
-        display_main_divider()
-        print()
+# VERSION: Final[str] = "0.1.0"
+# TITLE: Final[str] = f"Dariush Tasdighi - Simple Chatbot ({VERSION})"
 
 
-if __name__ == "__main__":
-    try:
-        main()
+# def main() -> None:
+#     """Main function"""
 
-    except KeyboardInterrupt:
-        print()
-        display_main_divider()
+#     clear_screen()
+#     display_main_divider()
 
-    except Exception as exception:
-        display_divider()
-        display_error_message(message=str(exception))
-        display_main_divider()
+#     display_title_message(message=TITLE)
 
-    finally:
-        print()
+#     messages: List[Dict] = []
+#     messages.append(SYSTEM_MESSAGE)
+
+#     while True:
+#         display_divider()
+#         user_prompt: str = input(USER_PROMPT).strip()
+
+#         if not user_prompt:
+#             continue
+
+#         if user_prompt.lower() in EXIT_COMMANDS:
+#             display_divider()
+#             display_warning_message(message=MESSAGE_GOODBYE)
+#             return
+
+#         user_message: Dict = {
+#             KEY_NAME_ROLE: ROLE_USER,
+#             KEY_NAME_CONTENT: user_prompt,
+#         }
+
+#         messages.append(user_message)
+
+#         assistant_answer, elapsed_time, prompt_tokens, completion_tokens = chat(
+#             messages=messages,
+#         )
+
+#         formatted_elapsed_time: str = format_seconds(seconds=elapsed_time)
+
+#         if not assistant_answer:
+#             messages.pop()
+#             assistant_answer = f"[red][bold][-][/bold] {MESSAGE_NO_CONTENT_RECEIVED}![/red]"
+#         else:
+#             assistant_message: Dict = {
+#                 KEY_NAME_ROLE: ROLE_ASSISTANT,
+#                 KEY_NAME_CONTENT: assistant_answer,
+#             }
+
+#             messages.append(assistant_message)
+
+#         display_tiny_divider()
+#         console = Console()
+#         markdown = Markdown(markup=assistant_answer)
+#         console.print(markdown)
+
+#         display_tiny_divider()
+#         print(f"Elapsed Time..............: {formatted_elapsed_time}")
+
+#         display_tiny_divider()
+#         print(f"Prompt (Input) Tokens.....: {prompt_tokens}")
+
+#         display_tiny_divider()
+#         print(f"Completion (Output) Tokens: {completion_tokens}")
+
+#         display_divider()
+#         print()
+
+
+# if __name__ == "__main__":
+#     try:
+#         main()
+
+#     except KeyboardInterrupt:
+#         print()
+
+#     except Exception as exception:
+#         display_divider()
+#         display_error_message(message=str(exception))
+
+#     finally:
+#         display_main_divider()
+#         print()
 # **************************************************

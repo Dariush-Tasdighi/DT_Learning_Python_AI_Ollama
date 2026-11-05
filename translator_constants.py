@@ -2,7 +2,7 @@
 Dictionary constants module.
 """
 
-import dt_llm_utility as utility
+import dt_lm as utility
 
 TEMPERATURE: float = 0.5
 MODEL_NAME: str = "gemma3:12b".strip().lower()

@@ -3,69 +3,84 @@ Display all downloaded models using the Ollama service.
 """
 
 # **************************************************
-import ollama
+# import ollama
 
-from rich import print
-# لوس‌بازی
-from ollama import ListResponse
-from dt_utility import clear_screen
+# from rich import print
 
-clear_screen()
+# # لوس‌بازی
+# from ollama import ListResponse
+# from dt_utility import clear_screen
 
-ollama_list: ListResponse = ollama.list()
+# clear_screen()
 
-print(ollama_list)
+# ollama_list: ListResponse = ollama.list()
 
-# Bad Practice
-# print(ollama_list["models"])
+# print(ollama_list)
 
-# Best Practice
-# print(ollama_list.models)
+# # - Bad Practice
+# # print(ollama_list["models"])
+
+# # - Best Practice
+# # print(ollama_list.models)
 # **************************************************
 
 
 # **************************************************
 # import ollama
 
+# from dt_utility import (
+#     clear_screen,
+#     display_divider,
+#     display_main_divider,
+# )
+
 # from rich import print
 # from ollama import ListResponse
-# from dt_utility import clear_screen
 
 # clear_screen()
+# display_main_divider()
 
 # ollama_list: ListResponse = ollama.list()
 # models = ollama_list.models
 
 # for model_item in models:
 #     print(model_item)
-#     print("-" * 50)
+#     display_divider()
 
 #     # print(model_item.model)
 
 #     # print(f"{model_item.model} - {model_item.details.parameter_size}")
 
-#     # if not model_item.details:
+#     # if model_item.details is None:
 #     #     print(f"[-] {model_item.model}")
 #     # else:
 #     #     print(f"{model_item.model} - {model_item.details.parameter_size}")
+
+# display_main_divider()
+# print()
 # **************************************************
 
 
 # **************************************************
 # import ollama
 
+# from dt_utility import (
+#     clear_screen,
+#     display_main_divider,
+# )
+
 # from rich import print
 # from ollama import ListResponse
-# from dt_utility import clear_screen
 
 # clear_screen()
+# display_main_divider()
 
 # ollama_list: ListResponse = ollama.list()
 # models = ollama_list.models
 
 # model_names: list[str] = []
 # for model_item in models:
-#     if model_item.model:
+#     if model_item.model is not None:
 #         model_names.append(model_item.model)
 # model_names.sort()
 
@@ -88,33 +103,38 @@ print(ollama_list)
 # #     # item: str = f"{index:>2} {model_name}"
 # #     print(item)
 
+# display_main_divider()
 # print()
 # **************************************************
 
 
 # **************************************************
-# import ollama
+import ollama
 
-# from rich import print
-# from ollama import ListResponse
-# from dt_utility import clear_screen
+from dt_utility import (
+    clear_screen,
+    display_main_divider,
+)
 
-# clear_screen()
-# print("=" * 50)
+from rich import print
+from ollama import ListResponse
 
-# ollama_list: ListResponse = ollama.list()
-# models = ollama_list.models
+clear_screen()
+display_main_divider()
 
-# model_names: list[str] = []
-# for model_item in models:
-#     if model_item.model:
-#         model_names.append(model_item.model)
-# model_names.sort()
+ollama_list: ListResponse = ollama.list()
+models = ollama_list.models
 
-# for index, model_name in enumerate(model_names, start=1):
-#     item: str = f"{index:>2} {model_name}"
-#     print(item)
+model_names: list[str] = []
+for model_item in models:
+    if model_item.model:
+        model_names.append(model_item.model)
+model_names.sort()
 
-# print("=" * 50)
-# print()
+for index, model_name in enumerate(model_names, start=1):
+    item: str = f"{index:>2} {model_name}"
+    print(item)
+
+display_main_divider()
+print()
 # **************************************************

@@ -2,7 +2,7 @@
 Dictionary constants module.
 """
 
-import dt_llm_utility as utility
+import dt_lm as utility
 
 TEMPERATURE: float = 0.2
 # MODEL_NAME: str = "qwen2.5-coder:14b".replace(" ", "").lower()

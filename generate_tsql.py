@@ -6,7 +6,7 @@ import os
 import time
 from rich import print
 from dt_ollama import chat
-import dt_llm_utility as utility
+import dt_lm as utility
 from rich.console import Console
 from rich.markdown import Markdown
 

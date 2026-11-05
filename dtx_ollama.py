@@ -5,7 +5,7 @@ Dariush Tasdighi Custom 'ollama' Package Module
 import time
 import logging
 import dt_utility as utility
-import dt_llm_utility as llm_utility
+import dt_lm as llm_utility
 
 from ollama import (
     Client,

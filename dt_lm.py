@@ -1,22 +1,25 @@
 """
-Dariush Tasdighi LLM Utility Module
+Dariush Tasdighi - Language Model Utility Module
 """
 
-from typing import Final
-import dt_utility as utility
+from typing import (
+    Dict,
+    List,
+    Final,
+)
 
-VERSION: Final[str] = "2.3.1"
+from dt_utility import prevent_direct_execution
 
-USER_QUESTION: Final[str] = "User: "
+VERSION: Final[str] = "3.0.0"
 
-EXIT_COMMANDS: Final[list[str]] = [
+USER_PROMPT: Final[str] = "User: "
+USER_ID_PROMPT: Final[str] = "User ID: "
+
+EXIT_COMMANDS: Final[List[str]] = [
     "bye".replace(" ", "").lower(),
     "exit".replace(" ", "").lower(),
     "quit".replace(" ", "").lower(),
 ]
-
-MESSAGE_GOODBYE: Final[str] = "Goodbye"
-MESSAGE_NO_CONTENT_RECEIVED: Final[str] = "No content received!"
 
 ROLE_USER: Final[str] = "user".replace(" ", "").lower()
 ROLE_SYSTEM: Final[str] = "system".replace(" ", "").lower()
@@ -26,14 +29,14 @@ KEY_NAME_ROLE: Final[str] = "role".replace(" ", "").lower()
 KEY_NAME_CONTENT: Final[str] = "content".replace(" ", "").lower()
 KEY_NAME_TEMPRETURE: Final[str] = "temperature".replace(" ", "").lower()
 
-SYSTEM_PROMPT: Final[str] = "You are a helpful AI assistant."
+MESSAGE_GOODBYE: Final[str] = "Goodbye"
+MESSAGE_NO_CONTENT_RECEIVED: Final[str] = "No content received!"
 
-SYSTEM_MESSAGE: Final[dict] = {
+SYSTEM_PROMPT: Final[str] = "You are a helpful AI assistant."
+SYSTEM_MESSAGE: Final[Dict] = {
     KEY_NAME_ROLE: ROLE_SYSTEM,
     KEY_NAME_CONTENT: SYSTEM_PROMPT,
 }
 
 if __name__ == "__main__":
-    utility.display_just_one_error_message(
-        message=utility.ERROR_MESSAGE_MODULE_IS_NOT_EXECUTED_DIRECTLY,
-    )
+    prevent_direct_execution()

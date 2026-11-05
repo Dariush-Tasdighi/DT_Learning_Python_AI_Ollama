@@ -67,23 +67,40 @@
 ```
 
 ```bash
+# py install 3.13 -u
+
 # py -3.13 -m venv .venv.3.13
 # .\.venv.3.13\Scripts\activate
 
-# python -m pip list
-# python -m pip install -r .\requirements.3.13.txt -U
-# python -m pip list
+# py -m pip list
+# py -m pip install -r .\requirements.3.13.txt -U
+# py -m pip list
 
 # deactivate
 ```
 
 ```bash
-py -3.14 -m venv .venv.3.14
-.\.venv.3.14\Scripts\activate
+# py install 3.14 -u
 
-python -m pip list
-python -m pip install -r .\requirements.3.14.txt -U
-python -m pip list
+# py -3.14 -m venv .venv.3.14
+# .\.venv.3.14\Scripts\activate
+
+# py -m pip list
+# py -m pip install -r .\requirements.3.14.txt -U
+# py -m pip list
+
+# deactivate
+```
+
+```bash
+py install 3.15 -u
+
+py -3.15 -m venv .venv.3.15
+.\.venv.3.15\Scripts\activate
+
+py -m pip list
+py -m pip install -r .\requirements.3.15.txt -U
+py -m pip list
 
 deactivate
 ```

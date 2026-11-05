@@ -7,7 +7,7 @@ import os
 import time
 from rich import print
 import dt_ollama as ollama
-import dt_llm_utility as utility
+import dt_lm as utility
 from rich.console import Console
 from rich.markdown import Markdown
 import translator_constants as constants

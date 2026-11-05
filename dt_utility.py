@@ -1,28 +1,26 @@
 """
-Dariush Tasdighi Utility Module
+Dariush Tasdighi - Utility Module
 """
 
 import os
+import sys
 import subprocess
 
 from typing import (
     Final,
     Optional,
 )
+
 from rich import print
 from datetime import datetime
 
-VERSION: Final[str] = "1.8.1"
-
-ERROR_MESSAGE_MODULE_IS_NOT_EXECUTED_DIRECTLY: Final[str] = (
-    "This module is designed to be imported, not executed directly"
-)
+# Major, Minor, Patch (Revision)
+# VERSION: Final[str] = "0.1.0"
+VERSION: Final[str] = "2.0.3"
 
 
 def clear_screen() -> None:
-    """
-    Clear screen
-    """
+    """Clear screen"""
 
     subprocess.run(
         shell=True,
@@ -32,28 +30,28 @@ def clear_screen() -> None:
     )
 
 
-def display_divider(character: str = "-", count: int = 50) -> None:
-    """
-    Display a divider
-    """
+def display_divider(character: str = "-", count: int = 50, color: str = "cyan") -> None:
+    """Display divider"""
 
-    print(character * count)
+    print(f"[{color}]{character * count}[/{color}]")
 
 
-def display_main_divider() -> None:
-    """
-    Display a main divider
-    """
+def display_main_divider(character: str = "=", count: int = 50, color: str = "cyan bold") -> None:
+    """Display main divider"""
 
-    display_divider(character="=", count=50)
+    display_divider(character=character, count=count, color=color)
+
+
+def display_tiny_divider(character: str = ".", count: int = 50, color: str = "bright_black") -> None:
+    """Display tiny divider"""
+
+    display_divider(character=character, count=count, color=color)
 
 
 def fix_text(text: Optional[str]) -> str:
-    """
-    Fix text
-    """
+    """Fix text"""
 
-    if text == None:
+    if text is None:
         return ""
 
     text = text.strip()
@@ -67,105 +65,109 @@ def fix_text(text: Optional[str]) -> str:
 
 
 def get_word_count(text: str) -> int:
-    """
-    Get word count
-    """
+    """Get word count"""
 
-    result: int = len(text.split(" "))
+    result: int = len(text.split(sep=" "))
     return result
 
 
 def display_title_message(message: str) -> None:
-    """
-    Display an title message
-    """
+    """Display title message"""
 
-    message = fix_text(text=message).title()
-    result: str = f"[blue bold]{message}[/blue bold]"
+    message = fix_text(text=message)
+    if message == "":
+        return
+
+    message = message.title()
+    result: str = f"[cyan bold]{message}[/cyan bold]"
     print(result)
 
 
 def display_error_message(message: str) -> None:
-    """
-    Display an error message
-    """
+    """Display error message"""
 
     message = fix_text(text=message)
+    if message == "":
+        return
 
     if not message.endswith("!"):
         message += "!"
 
-    result: str = f"[red bold][-] {message}[/red bold]"
+    result: str = f"[red bold]🔴 {message}[/red bold]"
     print(result)
 
 
 def display_success_message(message: str) -> None:
-    """
-    Display a success message
-    """
+    """Display success message"""
 
     message = fix_text(text=message)
+    if message == "":
+        return
 
     if not message.endswith("."):
         message += "."
 
-    result: str = f"[green bold][+] {message}[/green bold]"
+    result: str = f"[green bold]✅ {message}[/green bold]"
     print(result)
 
 
 def display_warning_message(message: str) -> None:
-    """
-    Display a warning message
-    """
+    """Display warning message"""
 
     message = fix_text(text=message)
+    if message == "":
+        return
 
     if not message.endswith("!"):
         message += "!"
 
-    result: str = f"[yellow bold][!] {message}[/yellow bold]"
+    result: str = f"[yellow bold]⚠️  {message}[/yellow bold]"
     print(result)
 
 
 def display_information_message(message: str) -> None:
-    """
-    Display an information message
-    """
+    """Display information message"""
 
     message = fix_text(text=message)
+    if message == "":
+        return
 
     if not message.endswith("."):
         message += "."
 
-    result: str = f"[grey35][.] {message}[/grey35]"
+    result: str = f"[blue]ℹ️  {message}[/blue]"
     print(result)
 
 
 def display_just_one_error_message(message: str) -> None:
-    """
-    Display just one error message
-    """
+    """Display just one error message"""
 
     clear_screen()
 
     message = fix_text(text=message)
+    if message == "":
+        return
 
-    if not message.endswith("!"):
-        message += "!"
+    message_length: int = len(message) + 4
 
-    message = f"[-] {message}"
-    message_length: int = len(message)
-
-    print("=" * message_length)
-    print(f"[red bold]{message}[/red bold]")
-    print("=" * message_length)
+    display_main_divider(count=message_length)
+    display_error_message(message=message)
+    display_main_divider(count=message_length)
     print()
+
+    sys.exit(1)
+
+
+def prevent_direct_execution() -> None:
+    """Prevent direct execution"""
+
+    message: str = "This module is designed to be imported, not executed directly"
+
+    display_just_one_error_message(message=message)
 
 
 def get_formated_now(with_miliseconds: bool = False) -> str:
-    """
-    Get formated now
-    """
+    """Get formated now"""
 
     now = datetime.now()
 
@@ -223,7 +225,48 @@ def format_seconds(seconds: float, display_milliseconds: bool = True) -> str:
             return seconds_part
 
 
+def check_file_exists(file_path: str) -> bool:
+    """Check file exists"""
+
+    if not os.path.exists(path=file_path):
+        return False
+
+    if not os.path.isfile(path=file_path):
+        return False
+
+    return True
+
+
+def check_file_exists_force(file_path: str) -> None:
+    """Check file exists (Force)"""
+
+    result: bool = check_file_exists(file_path=file_path)
+    if not result:
+        message: str = f"The file '{file_path}' does not exist"
+        display_just_one_error_message(message=message)
+
+
+def check_path_exists(path: str) -> bool:
+    """Check path exists"""
+
+    if not os.path.exists(path=path):
+        return False
+
+    if os.path.isfile(path=path):
+        return False
+
+    return True
+
+
+def check_path_exists_force(path: str) -> None:
+    """Check path exists (Force)"""
+
+    message: str = f"The path '{path}' does not exist"
+
+    result: bool = check_path_exists(path=path)
+    if not result:
+        display_just_one_error_message(message=message)
+
+
 if __name__ == "__main__":
-    display_just_one_error_message(
-        message=ERROR_MESSAGE_MODULE_IS_NOT_EXECUTED_DIRECTLY,
-    )
+    prevent_direct_execution()

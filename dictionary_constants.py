@@ -2,7 +2,7 @@
 Dictionary constants module.
 """
 
-import dt_llm_utility as utility
+import dt_lm as utility
 
 TEMPERATURE: float = 0
 

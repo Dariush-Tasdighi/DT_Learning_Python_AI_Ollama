@@ -7,7 +7,7 @@ import os
 import time
 from rich import print
 import dt_ollama as ollama
-import dt_llm_utility as utility
+import dt_lm as utility
 import generate_code_constants as constants
 
 
