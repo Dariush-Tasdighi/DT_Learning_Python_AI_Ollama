@@ -1,28 +1,51 @@
-# **************************************************
 """
-Dictionary Assistant (Offline).
-This is a simple dictionary assistant that translates English words to Farsi language.
+Dariush Tasdighi - AI Dictionary
 """
 
-import os
-import time
-import dt_ollama as ollama
-import dt_lm as utility
+from typing import (
+    Dict,
+    List,
+    Final,
+)
+
+from dt_utility import (
+    clear_screen,
+    format_seconds,
+    display_divider,
+    display_main_divider,
+    display_tiny_divider,
+    display_error_message,
+    display_title_message,
+)
+
+from dt_lm import (
+    ROLE_USER,
+    ROLE_SYSTEM,
+    USER_PROMPT,
+    EXIT_COMMANDS,
+    KEY_NAME_ROLE,
+    KEY_NAME_CONTENT,
+    MESSAGE_NO_CONTENT_RECEIVED,
+)
+
+from dt_ollama import chat
 
 from rich import print
-from typing import Final
 from rich.console import Console
 from rich.markdown import Markdown
-from dt_utility import clear_screen
 
-TEMPERATURE: Final[float] = 0
+VERSION: Final[str] = "1.0.0"
 
-# MODEL_NAME: Final[str] = "llama3.2:1b".strip().lower()  # هیچ جوابی نمی‌دهد
-# MODEL_NAME: Final[str] = "llama3.2:3b".strip().lower()  # نسبتا دری وری جواب می‌دهد
-# MODEL_NAME: Final[str] = "llama3.1:8b".strip().lower()  # تقریبا جواب خوبی می‌دهد
-# MODEL_NAME: Final[str] = "gemma3:1b".strip().lower()  # دری وری جواب می‌دهد
-# MODEL_NAME: Final[str] = "gemma3:4b".strip().lower()  # دری وری جواب می‌دهد
-MODEL_NAME: Final[str] = "gemma3:12b".strip().lower()  # عالی انجام می‌دهد
+TEMPERATURE: Final[float] = 0.0
+
+# MODEL_NAME: Final[str] = "llama3.2:1b".replace(" ", "").lower()  # هیچ جوابی نمی‌دهد
+# MODEL_NAME: Final[str] = "llama3.2:3b".replace(" ", "").lower()  # نسبتا دری وری جواب می‌دهد
+# MODEL_NAME: Final[str] = "llama3.1:8b".replace(" ", "").lower()  # تقریبا جواب خوبی می‌دهد
+# MODEL_NAME: Final[str] = "gemma3:1b".replace(" ", "").lower()  # دری وری جواب می‌دهد
+# MODEL_NAME: Final[str] = "gemma3:4b".replace(" ", "").lower()  # دری وری جواب می‌دهد
+# MODEL_NAME: Final[str] = "gemma3:12b".replace(" ", "").lower()  # عالی انجام می‌دهد
+MODEL_NAME: Final[str] = "gemma4:e2b".replace(" ", "").lower()  # خوب انجام می‌دهد
+# MODEL_NAME: Final[str] = "gemma4:e4b".replace(" ", "").lower()  # خوب انجام می‌دهد
 
 # SYSTEM_PROMPT: Final[str] = "You are a helpful AI assistant."
 
@@ -66,66 +89,72 @@ Two Sample Sentences:
 
 1) ######
 2) ######
-"""
+""".strip()
 
-# SYSTEM_PROMPT = SYSTEM_PROMPT.strip()
-SYSTEM_MESSAGE: dict = {
-    utility.KEY_NAME_ROLE: utility.ROLE_SYSTEM,
-    utility.KEY_NAME_CONTENT: SYSTEM_PROMPT,
+SYSTEM_MESSAGE: Final[Dict] = {
+    KEY_NAME_ROLE: ROLE_SYSTEM,
+    KEY_NAME_CONTENT: SYSTEM_PROMPT,
 }
 
 
 def main() -> None:
-    """
-    Main function
-    """
-
-    clear_screen()
+    """Main function"""
 
     while True:
-        print("=" * 50)
-        user_prompt: str = input(utility.USER_QUESTION)
+        clear_screen()
+        display_main_divider()
 
-        if user_prompt.lower() in utility.EXIT_COMMANDS:
+        message: str = f"Dariush Tasdighi - AI Dictionary ({VERSION})"
+        display_title_message(message=message)
+        display_divider()
+
+        user_prompt: str = input(USER_PROMPT).strip()
+
+        if not user_prompt:
+            continue
+
+        if user_prompt.lower() in EXIT_COMMANDS:
             break
 
-        clear_screen()
-
-        messages: list[dict] = []
+        messages: List[Dict] = []
         messages.append(SYSTEM_MESSAGE)
 
-        user_message: dict = {
-            utility.KEY_NAME_ROLE: utility.ROLE_USER,
-            utility.KEY_NAME_CONTENT: user_prompt,
+        user_message: Dict = {
+            KEY_NAME_ROLE: ROLE_USER,
+            KEY_NAME_CONTENT: user_prompt,
         }
 
         messages.append(user_message)
 
-        start_time: float = time.time()
-
-        assistant_answer, prompt_tokens, completion_tokens = ollama.chat(
+        assistant_answer, elapsed_time, prompt_tokens, completion_tokens = chat(
             messages=messages,
             model_name=MODEL_NAME,
             temperature=TEMPERATURE,
         )
 
-        response_time: float = time.time() - start_time
+        formatted_elapsed_time: str = format_seconds(seconds=elapsed_time)
 
         if not assistant_answer:
-            assistant_answer = utility.MESSAGE_NO_CONTENT_RECEIVED
+            assistant_answer = MESSAGE_NO_CONTENT_RECEIVED
 
-        print("-" * 50)
+        display_divider()
         console = Console()
         markdown = Markdown(markup=assistant_answer)
         console.print(markdown)
-        print("-" * 50)
-        print("Prompt Tokens (Input):", prompt_tokens)
-        print("-" * 50)
-        print("Completion Tokens (Output):", completion_tokens)
-        print("-" * 50)
-        print(f"Full response received {response_time:.2f} seconds after request.")
-        print("=" * 50)
+
+        display_divider()
+        print(f"Prompt (Input) Tokens.....: {prompt_tokens}")
+
+        display_tiny_divider()
+        print(f"Completion (Output) Tokens: {completion_tokens}")
+
+        display_divider()
+        print(f"Elapsed Time..............: {formatted_elapsed_time}")
+
+        display_main_divider()
         print()
+
+        input("Press [ENTER] to continue... ")
 
 
 if __name__ == "__main__":
@@ -136,84 +165,9 @@ if __name__ == "__main__":
         print()
 
     except Exception as error:
-        print(f"[-] {error}!")
+        display_divider()
+        display_error_message(message=str(error))
 
-    print()
-# **************************************************
-
-
-# **************************************************
-# """
-# Dictionary Assistant (Offline).
-# This is a simple dictionary assistant that translates English words to Farsi language.
-# """
-
-# import os
-# import time
-# from rich import print
-# import dt_ollama as ollama
-# import dt_llm_utility as utility
-# import dictionary_constants as constants
-
-
-# def main() -> None:
-#     """
-#     Main function.
-#     """
-
-#     os.system(command="cls" if os.name == "nt" else "clear")
-
-#     while True:
-#         print("=" * 50)
-#         user_prompt: str = input(utility.QUESTION_PROMPT)
-
-#         if user_prompt.lower() in utility.EXIT_COMMANDS:
-#             break
-
-#         os.system(command="cls" if os.name == "nt" else "clear")
-
-#         messages: list[dict] = []
-#         messages.append(constants.SYSTEM_MESSAGE)
-
-#         user_message: dict = {
-#             utility.KEY_NAME_ROLE: utility.ROLE_USER,
-#             utility.KEY_NAME_CONTENT: user_prompt,
-#         }
-
-#         messages.append(user_message)
-
-#         start_time: float = time.time()
-
-#         assistant_answer, prompt_tokens, completion_tokens = ollama.chat(
-#             messages=messages,
-#             model_name=constants.MODEL_NAME,
-#             temperature=constants.TEMPERATURE,
-#         )
-
-#         response_time: float = time.time() - start_time
-
-#         if not assistant_answer:
-#             assistant_answer = utility.MESSAGE_NO_CONTENT_RECEIVED
-
-#         print("-" * 50)
-#         print(assistant_answer)
-#         print("-" * 50)
-#         print("Prompt Tokens (Input):", prompt_tokens)
-#         print("-" * 50)
-#         print("Completion Tokens (Output):", completion_tokens)
-#         print("-" * 50)
-#         print(f"Full response received {response_time:.2f} seconds after request.")
-#         print("=" * 50)
-#         print()
-
-
-# if __name__ == "__main__":
-#     try:
-#         main()
-
-#     except KeyboardInterrupt:
-#         pass
-
-#     except Exception as error:
-#         print(f"[-] {error}")
-# **************************************************
+    finally:
+        display_main_divider()
+        print()

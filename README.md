@@ -1,12 +1,14 @@
 # Learning 'ollama' Package
 
-## This program was developed by
+## This project was developed by
 
 - **Dariush Tasdighi**
+  - From Iran / Tehran
   - Mobile Number: +98 912 108 7461
   - Email Address: <DariushT@GMail.com>
   - Telegram ID: <https://t.me/Dariush_Tasdighi>
-  - Virgool: <https://virgool.io/@dariush-tasdighi>
+  - Github: <https://github.com/dariush-tasdighi>
+  - Virgool: <https://virgool.ir/@dariush-tasdighi>
   - Aparat: <https://www.aparat.com/IranianExperts>
   - LinkedIn: <https://www.linkedin.com/in/tasdighi>
   - Instagram: <https://www.instagram.com/dariushtasdighi>
@@ -14,7 +16,7 @@
     - <https://t.me/IranianExperts>
     - <https://t.me/DT_PYTHON_LEARNING>
 
-## Used Packages
+## Main Packages
 
 ### 'rich' package
 
